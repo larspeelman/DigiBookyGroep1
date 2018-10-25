@@ -35,15 +35,14 @@ namespace Domain.Books
             return _ListofBooks;
         }
 
-        public IEnumerable<Book> GetBookByIsbn()
+        public Book GetBookById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Book GetBookById(int id)
+        public IEnumerable<Book> GetBookByIsbn()
         {
-            return _ListofBooks.Find(book => book.Id == id);
+            throw new NotImplementedException();
         }
-
     }
 }
