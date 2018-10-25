@@ -15,6 +15,7 @@ namespace DigiBookyTests.Users
             DBUser dbUser = new Domain.Users.DBUser();
             User testUser = new User();
             testUser.IdentificationNumber = "LP_21041987";
+            testUser.Email = "xxx@hotmail.com";
 
             //When
             dbUser.Save(testUser);
