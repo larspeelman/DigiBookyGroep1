@@ -6,7 +6,8 @@ namespace Domain.Books
 {
     public interface IDBBooks
     {
-        IEnumerable<Book> GetBookByIsdn();
+        IEnumerable<Book> GetBookByIsbn();
         IEnumerable<Book> GetAllBooks();
+        Book GetBookById(string id);
     }
 }

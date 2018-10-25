@@ -53,6 +53,17 @@ namespace Api.Controllers
             return BadRequest($"Book with Title: {title} not found");
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<BookDTO> ShowDetailsOfBook(int id)
+        {
+            var book = _bookService.ShowDetailsOfBook(id);
+            if (book == null)
+            {
+                return BadRequest($"Book with id: {id} not found");
+            }
+            return Ok(_bookMapper.BooksMapper(book));
+        }
+
         // POST: api/Book
         [HttpPost]
         public void Post([FromBody] BookDTO newBook)

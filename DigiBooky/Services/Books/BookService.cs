@@ -23,5 +23,10 @@ namespace Services.Books
         {
             return _dbBook.GetAllBooks().SingleOrDefault(bk => bk.Isbn.Contains(isbn));
         }
+
+        public Book ShowDetailsOfBook(int id)
+        {
+            return _dbBook.GetBookById(id);
+        }
     }
 }
