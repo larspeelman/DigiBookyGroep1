@@ -34,5 +34,10 @@ namespace Domain.Books
         {
             return _ListofBooks;
         }
+
+        public IEnumerable<Book> GetBookByIsdn()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

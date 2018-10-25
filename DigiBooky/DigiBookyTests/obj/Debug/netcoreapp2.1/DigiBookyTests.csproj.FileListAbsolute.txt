@@ -27,8 +27,6 @@ D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\DigiBookyTests\obj\Debug\n
 D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\DigiBookyTests\obj\Debug\netcoreapp2.1\DigiBookyTests.csproj.CopyComplete
 D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\DigiBookyTests\bin\Debug\netcoreapp2.1\DigiBookyTests.pdb
 D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\DigiBookyTests\bin\Debug\netcoreapp2.1\Api.dll
-D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\DigiBookyTests\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Core.dll
 D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\DigiBookyTests\bin\Debug\netcoreapp2.1\Api.pdb
-D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\DigiBookyTests\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Core.xml
 D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\DigiBookyTests\obj\Debug\netcoreapp2.1\DigiBookyTests.dll
 D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\DigiBookyTests\obj\Debug\netcoreapp2.1\DigiBookyTests.pdb
