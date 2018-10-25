@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Services.Rentals
 {
-    interface IRentalService
+    public interface IRentalService
     {
     }
 }

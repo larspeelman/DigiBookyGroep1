@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Domain.Books
 {
-    interface IDBBooks
+    public interface IDBBooks
     {
+        IEnumerable<Book> GetBookByIsdn();
     }
 }

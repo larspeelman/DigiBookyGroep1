@@ -10,3 +10,15 @@ C:\coding\digibooky\DigiBooky\Services\obj\Debug\netcoreapp2.1\Services.Assembly
 C:\coding\digibooky\DigiBooky\Services\obj\Debug\netcoreapp2.1\Services.csproj.CopyComplete
 C:\coding\digibooky\DigiBooky\Services\obj\Debug\netcoreapp2.1\Services.dll
 C:\coding\digibooky\DigiBooky\Services\obj\Debug\netcoreapp2.1\Services.pdb
+D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Services\bin\Debug\netcoreapp2.1\Services.deps.json
+D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Services\bin\Debug\netcoreapp2.1\Services.dll
+D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Services\bin\Debug\netcoreapp2.1\Services.pdb
+D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Services\bin\Debug\netcoreapp2.1\Domain.dll
+D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Services\bin\Debug\netcoreapp2.1\Domain.pdb
+D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Services\obj\Debug\netcoreapp2.1\Services.csprojAssemblyReference.cache
+D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Services\obj\Debug\netcoreapp2.1\Services.csproj.CoreCompileInputs.cache
+D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Services\obj\Debug\netcoreapp2.1\Services.AssemblyInfoInputs.cache
+D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Services\obj\Debug\netcoreapp2.1\Services.AssemblyInfo.cs
+D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Services\obj\Debug\netcoreapp2.1\Services.csproj.CopyComplete
+D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Services\obj\Debug\netcoreapp2.1\Services.dll
+D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Services\obj\Debug\netcoreapp2.1\Services.pdb
