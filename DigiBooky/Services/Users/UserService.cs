@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using Domain.Users;
@@ -43,7 +44,7 @@ namespace Services.Users
         public User CreateNewUser(User userToCreate)
         {
             if (IsEmailAdressValid(userToCreate.Email)
-                && IsIdentificationNumberValid(userToCreate.IdentificationNumber, userToCreate.Birthdate.ToString("dd/MM/yyyy")))
+                && IsIdentificationNumberValid(userToCreate.IdentificationNumber, userToCreate.Birthdate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
             {
                 _dbUsers.Save(userToCreate);
                 return userToCreate;

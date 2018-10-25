@@ -1,9 +1,9 @@
 ﻿using Domain.Users;
-using Microsoft.EntityFrameworkCore;
 using NSubstitute;
 using Services.Users;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using Xunit;
 
@@ -18,7 +18,7 @@ namespace DigiBookyTests.Users
             IDBUsers DBUsersStub = Substitute.For<IDBUsers>();
             //Given
             DateTime birthdate = new DateTime(1987, 4, 21);
-            string BD = birthdate.ToString("dd/MM/yyyy");
+            string BD = birthdate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
 
 
             string uniqueId = "LP_21041987";
