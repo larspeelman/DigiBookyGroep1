@@ -29,7 +29,7 @@ namespace Domain.Users
         public override bool Equals(object obj)
         {
             var user = obj as User;
-            return user.IdentificationNumber.Equals(IdentificationNumber) && user.Email.Equals(Email);
+            return user.IdentificationNumber.ToUpper().Equals(IdentificationNumber.ToUpper()) && user.Email.ToUpper().Equals(Email.ToUpper());
         }
 
         public override int GetHashCode()

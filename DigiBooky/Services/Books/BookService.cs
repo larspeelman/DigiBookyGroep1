@@ -8,11 +8,11 @@ namespace Services.Books
 {
     public class BookService: IBookService
     {
-        private readonly DBBooks _dbBook;
+        private readonly IDBBooks _dbBook;
 
-        public BookService()
+        public BookService(IDBBooks dbBook)
         {
-            _dbBook = new DBBooks();
+            _dbBook = dbBook;
         }
         public IEnumerable<Book> GetAllBooks()
         {

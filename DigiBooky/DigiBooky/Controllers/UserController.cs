@@ -14,13 +14,13 @@ namespace Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserService userService;
-        private readonly IMapperUser mapperUser;
+        private readonly IUserService _userService;
+        private readonly IMapperUser _mapperUser;
 
         public UserController(IUserService userService, IMapperUser mapperUser)
         {
-            this.userService = userService;
-            this.mapperUser = mapperUser;
+            this._userService = userService;
+            this._mapperUser = mapperUser;
         }
 
 
@@ -42,7 +42,7 @@ namespace Api.Controllers
         [HttpPost]
         public ActionResult<UserDTO> RegisterNewUser([FromBody] UserDTO userDTOToCreate)
         {                
-            if (userService.CreateNewUser(mapperUser.FromDTOUserToUser(userDTOToCreate)) == null)
+            if (_userService.CreateNewUser(_mapperUser.FromDTOUserToUser(userDTOToCreate)) == null)
             {
               return BadRequest("BAD INPUT");
             }

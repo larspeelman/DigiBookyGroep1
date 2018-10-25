@@ -1,12 +1,3 @@
-C:\coding\digibooky\DigiBooky\Domain\bin\Debug\netcoreapp2.1\Domain.deps.json
-C:\coding\digibooky\DigiBooky\Domain\bin\Debug\netcoreapp2.1\Domain.dll
-C:\coding\digibooky\DigiBooky\Domain\bin\Debug\netcoreapp2.1\Domain.pdb
-C:\coding\digibooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.csprojAssemblyReference.cache
-C:\coding\digibooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.csproj.CoreCompileInputs.cache
-C:\coding\digibooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.AssemblyInfoInputs.cache
-C:\coding\digibooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.AssemblyInfo.cs
-C:\coding\digibooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.dll
-C:\coding\digibooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.pdb
 D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Domain\bin\Debug\netcoreapp2.1\Domain.deps.json
 D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Domain\bin\Debug\netcoreapp2.1\Domain.dll
 D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Domain\bin\Debug\netcoreapp2.1\Domain.pdb
@@ -16,3 +7,11 @@ D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Domain\obj\Debug\netcoreap
 D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.AssemblyInfo.cs
 D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.dll
 D:\SwitchFullyDotNet-repositories\DigiBooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.pdb
+C:\coding\digibooky\DigiBooky\Domain\bin\Debug\netcoreapp2.1\Domain.deps.json
+C:\coding\digibooky\DigiBooky\Domain\bin\Debug\netcoreapp2.1\Domain.dll
+C:\coding\digibooky\DigiBooky\Domain\bin\Debug\netcoreapp2.1\Domain.pdb
+C:\coding\digibooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.csproj.CoreCompileInputs.cache
+C:\coding\digibooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.AssemblyInfoInputs.cache
+C:\coding\digibooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.AssemblyInfo.cs
+C:\coding\digibooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.dll
+C:\coding\digibooky\DigiBooky\Domain\obj\Debug\netcoreapp2.1\Domain.pdb

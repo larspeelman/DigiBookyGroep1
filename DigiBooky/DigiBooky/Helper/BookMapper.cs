@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Helper;
 using Domain.Books;
 
 namespace Api.DTO
 {
-    public class BookMapper
+    public class BookMapper: IBookMapper
     {
-        public static BookDTO BooksMapper(Book book)
+        public BookDTO BooksMapper(Book book)
         {
             BookDTO bookDto = new BookDTO
             {

@@ -8,11 +8,11 @@ namespace Services.Users
 {
     public class UserService : IUserService
     {
-        private readonly IDBUsers dbUsers;
+        private readonly IDBUsers _dbUsers;
 
-        public UserService(IDBUsers dbUsers)
+        public UserService(IDBUsers _dbUsers)
         {
-            this.dbUsers = dbUsers;
+            this._dbUsers = _dbUsers;
         }
 
         public bool IsIdentificationNumberValid(string identificationNumber, string birthdate)
@@ -45,7 +45,7 @@ namespace Services.Users
             if (IsEmailAdressValid(userToCreate.Email)
                 && IsIdentificationNumberValid(userToCreate.IdentificationNumber, userToCreate.Birthdate.ToString("dd/MM/yyyy")))
             {
-                dbUsers.Save(userToCreate);
+                _dbUsers.Save(userToCreate);
                 return userToCreate;
             }
             
