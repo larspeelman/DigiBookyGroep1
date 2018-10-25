@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NJsonSchema;
+using NSwag.AspNetCore;
 using Services.Books;
 
 namespace DigiBooky
@@ -28,6 +30,7 @@ namespace DigiBooky
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<IBookService, BookService>();
+            services.AddSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +44,12 @@ namespace DigiBooky
             {
                 app.UseHsts();
             }
-
+            // Register the Swagger generator and the Swagger UI middlewares
+            app.UseSwaggerUi3WithApiExplorer(settings =>
+            {
+                settings.GeneratorSettings.DefaultPropertyNameHandling =
+                    PropertyNameHandling.CamelCase;
+            });
             app.UseHttpsRedirection();
             app.UseMvc();
         }
