@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Services.Users
 {
-    interface IUserService
+    public interface IUserService
     {
     }
 }

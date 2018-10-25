@@ -26,8 +26,7 @@ namespace Domain.Books
             };
             for (int bookCount = 1; bookCount < 50; bookCount++)
             {
-                _ListofBooks.Add(new Book($"BookTitle{bookCount}", Guid.NewGuid().ToString(),
-                    authorList[red.Next(0, 3)]));
+                _ListofBooks.Add(new Book($"BookTitle{bookCount}", bookCount.ToString(), authorList[red.Next(0, 3)]));
             }
         }
 

@@ -13,6 +13,8 @@ using Microsoft.Extensions.Options;
 using NJsonSchema;
 using NSwag.AspNetCore;
 using Services.Books;
+using Services.Rentals;
+using Services.Users;
 
 namespace DigiBooky
 {
@@ -30,6 +32,8 @@ namespace DigiBooky
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<IBookService, BookService>();
+            services.AddSingleton<IRentalService, RentalService>();
+            services.AddSingleton<IUserService, UserService>();
             services.AddSwagger();
         }
 

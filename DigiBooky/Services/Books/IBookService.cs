@@ -8,5 +8,6 @@ namespace Services.Books
     public interface IBookService
     {
         IEnumerable<Book> GetAllBooks();
+        Book GetBookByIsdn(string isbn);
     }
 }
