@@ -9,5 +9,6 @@ namespace Services.Books
     {
         IEnumerable<Book> GetAllBooks();
         Book GetBookByIsdn(string isbn);
+        Book ShowDetailsOfBook(int id);
     }
 }

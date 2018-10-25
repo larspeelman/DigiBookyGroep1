@@ -8,6 +8,6 @@ namespace Domain.Books
     {
         IEnumerable<Book> GetBookByIsbn();
         IEnumerable<Book> GetAllBooks();
-        Book GetBookById(string id);
+        Book GetBookById(intgit id);
     }
 }

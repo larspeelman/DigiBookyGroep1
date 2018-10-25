@@ -42,7 +42,7 @@ namespace Domain.Books
 
         public Book GetBookById(int id)
         {
-            return _ListofBooks.Find(book => book.Id == id.ToString());
+            return _ListofBooks.Find(book => book.Id == id);
         }
 
     }
