@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Services.Books;
 
 namespace Api.Controllers
 {
@@ -11,15 +13,24 @@ namespace Api.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
+        private readonly IBookService bookService;
+
+        public BookController(IBookService bookService)
+        {
+            this.bookService = bookService;
+        }
+
         // GET: api/Book
         [HttpGet]
-        public IEnumerable<string> Get()
+        //[Route("GetAllBooks")]
+        public IEnumerable<BookDTO> GetAllBooks()
         {
-            return new string[] { "value1", "value2" };
+            return bookService.GetAllBooks().Select(BookMapper.BooksMapper);
         }
 
         // GET: api/Book/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetBook")]
+        [Route("GetOneBook")]
         public string Get(int id)
         {
             return "value";
