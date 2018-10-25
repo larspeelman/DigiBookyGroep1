@@ -2,6 +2,11 @@ C:\coding\digibooky\DigiBooky\DigiBooky\bin\Debug\netcoreapp2.1\Api.deps.json
 C:\coding\digibooky\DigiBooky\DigiBooky\bin\Debug\netcoreapp2.1\Api.runtimeconfig.json
 C:\coding\digibooky\DigiBooky\DigiBooky\bin\Debug\netcoreapp2.1\Api.runtimeconfig.dev.json
 C:\coding\digibooky\DigiBooky\DigiBooky\bin\Debug\netcoreapp2.1\Api.dll
+C:\coding\digibooky\DigiBooky\DigiBooky\bin\Debug\netcoreapp2.1\Api.pdb
+C:\coding\digibooky\DigiBooky\DigiBooky\bin\Debug\netcoreapp2.1\Domain.dll
+C:\coding\digibooky\DigiBooky\DigiBooky\bin\Debug\netcoreapp2.1\Services.dll
+C:\coding\digibooky\DigiBooky\DigiBooky\bin\Debug\netcoreapp2.1\Services.pdb
+C:\coding\digibooky\DigiBooky\DigiBooky\bin\Debug\netcoreapp2.1\Domain.pdb
 C:\coding\digibooky\DigiBooky\DigiBooky\obj\Debug\netcoreapp2.1\Api.csprojAssemblyReference.cache
 C:\coding\digibooky\DigiBooky\DigiBooky\obj\Debug\netcoreapp2.1\Api.csproj.CoreCompileInputs.cache
 C:\coding\digibooky\DigiBooky\DigiBooky\obj\Debug\netcoreapp2.1\Api.RazorAssemblyInfo.cache
@@ -9,6 +14,6 @@ C:\coding\digibooky\DigiBooky\DigiBooky\obj\Debug\netcoreapp2.1\Api.RazorAssembl
 C:\coding\digibooky\DigiBooky\DigiBooky\obj\Debug\netcoreapp2.1\Api.AssemblyInfoInputs.cache
 C:\coding\digibooky\DigiBooky\DigiBooky\obj\Debug\netcoreapp2.1\Api.AssemblyInfo.cs
 C:\coding\digibooky\DigiBooky\DigiBooky\obj\Debug\netcoreapp2.1\Api.RazorTargetAssemblyInfo.cache
-C:\coding\digibooky\DigiBooky\DigiBooky\bin\Debug\netcoreapp2.1\Api.pdb
+C:\coding\digibooky\DigiBooky\DigiBooky\obj\Debug\netcoreapp2.1\Api.csproj.CopyComplete
 C:\coding\digibooky\DigiBooky\DigiBooky\obj\Debug\netcoreapp2.1\Api.dll
 C:\coding\digibooky\DigiBooky\DigiBooky\obj\Debug\netcoreapp2.1\Api.pdb

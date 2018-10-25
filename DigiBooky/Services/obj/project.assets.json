@@ -228,6 +228,19 @@
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
         }
+      },
+      "Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "AutoMapper": "7.0.1"
+        },
+        "compile": {
+          "bin/placeholder/Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Domain.dll": {}
+        }
       }
     }
   },
@@ -759,11 +772,17 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Domain/1.0.0": {
+      "type": "project",
+      "path": "../Domain/Domain.csproj",
+      "msbuildProject": "../Domain/Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
       "AutoMapper >= 7.0.1",
+      "Domain >= 1.0.0",
       "Microsoft.NETCore.App >= 2.1.0"
     ]
   },
@@ -797,7 +816,11 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\coding\\digibooky\\DigiBooky\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\coding\\digibooky\\DigiBooky\\Domain\\Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

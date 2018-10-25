@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.DTO;
+using Api.Helper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Services.Users;
 
 namespace Api.Controllers
 {
@@ -11,6 +14,16 @@ namespace Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly IUserService userService;
+        private readonly IMapperUser mapperUser;
+
+        public UserController(IUserService userService, IMapperUser mapperUser)
+        {
+            this.userService = userService;
+            this.mapperUser = mapperUser;
+        }
+
+
         // GET: api/User
         [HttpGet]
         public IEnumerable<string> Get()
@@ -27,8 +40,13 @@ namespace Api.Controllers
 
         // POST: api/User
         [HttpPost]
-        public void Post([FromBody] string value)
-        {
+        public ActionResult<UserDTO> RegisterNewUser([FromBody] UserDTO userDTOToCreate)
+        {                
+            if (userService.CreateNewUser(mapperUser.FromDTOUserToUser(userDTOToCreate)) == null)
+            {
+              return BadRequest("BAD INPUT");
+            }
+            return Ok(User);
         }
 
         // PUT: api/User/5

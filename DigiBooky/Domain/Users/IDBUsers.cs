@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Domain.Users
 {
-    interface IDBUsers
+    public interface IDBUsers
     {
+        void Save(User userToSave);
     }
 }
