@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Users\" />
+    <Folder Include="Books\" />
     <Folder Include="Rentals\" />
   </ItemGroup>
 

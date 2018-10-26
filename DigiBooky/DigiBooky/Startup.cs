@@ -1,26 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Api.DTO;
+﻿using Api.DTO;
 using Api.Helper;
 using Domain.Books;
 using Domain.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using NJsonSchema;
 using NSwag.AspNetCore;
 using Services.Books;
 using Services.Rentals;
 using Services.Users;
 
-namespace DigiBooky
+namespace Api
 {
     public class Startup
     {
@@ -37,12 +30,18 @@ namespace DigiBooky
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<IBookService, BookService>();
             services.AddSingleton<IRentalService, RentalService>();
-            services.AddSingleton<IUserService, UserService>();
-            services.AddSingleton<IDBBookRepository, DBBookRepository>();
-            services.AddSingleton<IMapperUser, MapperUser>();
-            services.AddSingleton<IBookMapper, BookMapper>();
             services.AddSingleton<IUserRepository, UserRepository>();
-            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IUserService, UserService>()
+                    .AddSingleton<IDBBookRepository, DBBookRepository>()
+                    .AddSingleton<IBookMapper,BookMapper>()
+                    .AddSingleton<IMapperUser, MapperUser>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ModeratorAccess",
+                    policy => policy.RequireRole(Roles.Role.Libarian.ToString()
+                                               , Roles.Role.Administrator.ToString()));
+
+            });
             services.AddSwagger();
         }
 
@@ -63,7 +62,7 @@ namespace DigiBooky
                 settings.GeneratorSettings.DefaultPropertyNameHandling =
                     PropertyNameHandling.CamelCase;
             });
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

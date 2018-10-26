@@ -8,7 +8,7 @@ namespace Domain.Users
 {
     public class User
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string IdentificationNumber { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
@@ -20,6 +20,7 @@ namespace Domain.Users
         public string StreetNumber { get; set; }
         public string PostalCode { get; set; }
         public string City { get; set; }
+        public Roles.Role RoleOfThisUser { get; set; }
 
         public User()
         {

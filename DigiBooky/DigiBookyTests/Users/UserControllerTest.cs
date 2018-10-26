@@ -9,11 +9,23 @@ using Api.Helper;
 using Api.DTO;
 using Domain.Users;
 using Microsoft.AspNetCore.Mvc;
+using NSubstitute.ReturnsExtensions;
 
 namespace DigiBookyTests.Users
 {
    public class UserControllerTest
     {
+
+        private User GetTestUser()
+        {
+            User user = new User();
+            user.IdentificationNumber = "LP_21041987";
+            user.Email = "xxx@hotmail.com";
+            user.Birthdate = new DateTime(1987, 4, 21);
+            return user;
+        }
+
+
         [Fact]
         public void GivenUserController_WhenRegisterNewUser_ThenUserServiceReceiveCallToCreateUser()
         {
@@ -76,6 +88,55 @@ namespace DigiBookyTests.Users
 
             //then
             Assert.IsType<BadRequestObjectResult>(check);
+        }
+
+        [Fact]
+        public void GivenUserController_WhenRegisterLiberianOfExistingUserAndAdministrator_ThenReturnOk()
+        {
+            //Given
+            IUserService userService = Substitute.For<IUserService>();
+            IMapperUser mapperUser = Substitute.For<IMapperUser>();
+            UserController userController = new UserController(userService, mapperUser);
+            UserDTO testUser = new UserDTO();
+            User user = GetTestUser();
+            user.Id = 1;
+            user.RoleOfThisUser = Roles.Role.Libarian;
+            
+            mapperUser.FromDTOUserToUser(testUser).Returns(user);
+            userService.SetUserAsLibarian(1).Returns(user);
+
+
+            //When
+            var check = userController.RegiserLibarian(1).Result;
+
+
+            //then
+            Assert.IsType<OkObjectResult>(check);
+        }
+
+        [Fact]
+        public void GivenUserController_WhenRegisterLiberianOfNonExistingUserAndAdministrator_ThenReturnBadRequest()
+        {
+            //Given
+            IUserService userService = Substitute.For<IUserService>();
+            IMapperUser mapperUser = Substitute.For<IMapperUser>();
+            UserController userController = new UserController(userService, mapperUser);
+            UserDTO testUser = new UserDTO();
+            User user = GetTestUser();
+            user.Id = 1;
+            user.RoleOfThisUser = Roles.Role.Libarian;
+
+            mapperUser.FromDTOUserToUser(testUser).Returns(user);
+            userService.SetUserAsLibarian(1).ReturnsNull();
+
+
+            //When
+            var check = userController.RegiserLibarian(1).Result;
+
+
+            //then
+            Assert.IsType<BadRequestObjectResult>(check);
+
         }
     }
 }

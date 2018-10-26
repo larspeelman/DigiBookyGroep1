@@ -17,12 +17,13 @@ namespace Api.Helper
                 Birthdate = userDTO.Birthdate,
                 FirstName = userDTO.FirstName,
                 LastName = userDTO.LastName,
-                IdentificationNumber = userDTO.IdentificationNumber,
+                Id = userDTO.Id,
                 City = userDTO.City,
                 PostalCode = userDTO.PostalCode,
                 Email = userDTO.Email,
                 StreetName = userDTO.StreetName,
-                StreetNumber = userDTO.StreetNumber
+                StreetNumber = userDTO.StreetNumber,
+                RoleOfThisUser = userDTO.RoleOfThisUser
             };
                 
         }
@@ -35,12 +36,13 @@ namespace Api.Helper
                 Birthdate = user.Birthdate,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                IdentificationNumber = user.IdentificationNumber,
+                Id = user.Id,
                 City = user.City,
                 PostalCode = user.PostalCode,
                 Email = user.Email,
                 StreetName = user.StreetName,
-                StreetNumber = user.StreetNumber
+                StreetNumber = user.StreetNumber, 
+                RoleOfThisUser = user.RoleOfThisUser
             };
 
         }

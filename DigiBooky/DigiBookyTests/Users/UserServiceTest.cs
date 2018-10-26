@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using NSubstitute.ReturnsExtensions;
 using Xunit;
 
 
@@ -94,6 +95,44 @@ namespace DigiBookyTests.Users
 
             //then
             DBUsersStub.Received().Save(testUser);
+        }
+
+        [Fact]
+        public void GivenUserService_WhenRegisterLiberianOfExistingUserAndAdministrator_ThenReturnUserAsLibarian()
+        {
+            //Given
+            IUserRepository repositoryUserStub = Substitute.For<IUserRepository>();
+            User testUser = GetTestUser();
+            testUser.RoleOfThisUser = Roles.Role.Libarian;
+            UserService userService = new UserService(repositoryUserStub);
+            repositoryUserStub.SetUserAsLibarian(1).Returns(testUser);
+
+            //then
+            Assert.True(userService.SetUserAsLibarian(1).RoleOfThisUser==Roles.Role.Libarian);
+        }
+
+        [Fact]
+        public void GivenUserService_WhenRegisterLiberianOfNonExistingUserAndAdministrator_ThenReturnNull()
+        {
+            //Given
+            IUserRepository repositoryUserStub = Substitute.For<IUserRepository>();
+            User testUser = GetTestUser();
+            testUser.RoleOfThisUser = Roles.Role.Libarian;
+            UserService userService = new UserService(repositoryUserStub);
+            repositoryUserStub.SetUserAsLibarian(1).ReturnsNull();
+
+            //then
+            Assert.Null(userService.SetUserAsLibarian(1));
+        }
+
+        private User GetTestUser()
+        {
+            User user = new User();
+            user.IdentificationNumber = "LP_21041987";
+            user.Email = "xxx@hotmail.com";
+            user.Birthdate = new DateTime(1987, 4, 21);
+            user.Id = 1;
+            return user;
         }
     }
 }
