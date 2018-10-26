@@ -19,5 +19,17 @@ namespace Domain.Books
             CounterOfBooks++;
         }
 
+        public override bool Equals(object obj)
+        {
+            var book = obj as Book;
+            return book != null &&
+                   Id == book.Id &&
+                   Isbn == book.Isbn;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Isbn);
+        }
     }
 }

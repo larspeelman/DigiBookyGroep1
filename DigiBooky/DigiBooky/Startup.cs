@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.DTO;
 using Api.Helper;
 using Domain.Books;
 using Microsoft.AspNetCore.Builder;
@@ -35,7 +36,10 @@ namespace DigiBooky
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<IBookService, BookService>();
             services.AddSingleton<IRentalService, RentalService>();
-            services.AddSingleton<IUserService, UserService>().AddSingleton<IDBBooks, DBBooks>().AddSingleton<IMapperUser, MapperUser>();
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IDBBookRepository, DBBookRepository>();
+            services.AddSingleton<IMapperUser, MapperUser>();
+            services.AddSingleton<IBookMapper, BookMapper>();
             services.AddSwagger();
         }
 

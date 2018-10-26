@@ -10,5 +10,21 @@ namespace Api.DTO
         public string BookTitle { get; set; }
         public string Isbn { get; set; }
         public string AuthorName { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var dTO = obj as BookDTO;
+            return dTO != null &&
+                   BookTitle == dTO.BookTitle &&
+                   Isbn == dTO.Isbn &&
+                   AuthorName == dTO.AuthorName;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(BookTitle, Isbn, AuthorName);
+        }
     }
+
+   
 }

@@ -7,12 +7,12 @@ using Xunit;
 
 namespace DigiBookyTests.Books
 {
-    public class BookDBTest
+    public class DBBookRepositoryTests
     {
         [Fact]
         public void GivenBookDB_WhenGetAllBooks_ThenReturnFullDatabase()
         {
-            DBBooks dBBooks = new DBBooks();
+            DBBookRepository dBBooks = new DBBookRepository();
             Assert.Equal(49, dBBooks.GetAllBooks().Count());
         }
 
