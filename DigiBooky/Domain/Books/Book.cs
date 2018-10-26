@@ -13,13 +13,10 @@ namespace Domain.Books
         public string Isbn { get; set; }
         public Author Author { get; set; }
 
-        public Book(string bookTitle, string isbn, Author author)
+        public Book()
         {
             Id = CounterOfBooks;
             CounterOfBooks++;
-            BookTitle = bookTitle;
-            Isbn = isbn;
-            Author = author;
         }
 
     }

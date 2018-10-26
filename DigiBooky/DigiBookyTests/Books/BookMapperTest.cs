@@ -14,7 +14,7 @@ namespace DigiBookyTests.Books
         public void GivenBookMapper_WhenMapToBookDto_ThenReturnListWithBookDto()
         {
             BookMapper bookMapper= new BookMapper();
-            Book book = new Book("test","ISD",new Author("Test","Test"));
+            Book book = new Book{ BookTitle = "test", Isbn = "5", Author = new Author("test", "test") };
             Assert.IsType<BookDTO>(bookMapper.BooksMapper(book));
         }
 

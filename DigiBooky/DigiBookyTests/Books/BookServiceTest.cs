@@ -29,5 +29,19 @@ namespace DigiBookyTests.Books
 
             Assert.Equal(testList, bookService.GetAllBooks());
         }
+
+        [Fact]
+        public void GivenBookService_WhenShowDetailsOfBook_ThenReturnBookById()
+        {
+            IDBBooks dbBookstub = Substitute.For<IDBBooks>();
+            BookService bookService = new BookService(dbBookstub);
+            bookService.ShowDetailsOfBook(1);
+            Book testBook = new Book { Id = 1, BookTitle = "test" };
+
+
+            dbBookstub.Received().GetBookById(1);
+
+            
+        }
     }
 }

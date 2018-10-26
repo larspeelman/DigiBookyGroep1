@@ -25,16 +25,18 @@ namespace DigiBookyTests.Books
 
         }
 
-        //[Fact]
-        //public void GivenBookController_WhenShowDetailsOFBook_ThenShouldEnterMEthodOInService()
-        //{
-        //    IBookService bookService = Substitute.For<IBookService>();
-        //    IBookMapper bookMapper = Substitute.For<IBookMapper>();
-        //    BookController bookController = new BookController(bookService, bookMapper);
-        //    BookDTO testBook = new BookDTO();
-            
+        [Fact]
+        public void GivenBookController_WhenShowDetailsOFBook_ThenShouldEnterMEthodOInService()
+        {
+            IBookService bookService = Substitute.For<IBookService>();
+            IBookMapper bookMapper = Substitute.For<IBookMapper>();
+            BookController bookController = new BookController(bookService, bookMapper);
+            BookDTO testBook = new BookDTO();
 
-        //    bookController.ShowDetailsOfBook(testBook);
-        //}
+
+            bookController.ShowDetailsOfBook(1);
+
+            bookService.Received().ShowDetailsOfBook(1);
+        }
     }
 }

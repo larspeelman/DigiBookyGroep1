@@ -26,7 +26,7 @@ namespace Domain.Books
             };
             for (int bookCount = 1; bookCount < 50; bookCount++)
             {
-                _ListofBooks.Add(new Book($"BookTitle{bookCount}", bookCount.ToString(), authorList[red.Next(0, 3)]));
+                _ListofBooks.Add(new Book { BookTitle = $"BookTitle{bookCount}", Author = authorList[red.Next(0, 3)], Isbn="isbn" + bookCount.ToString()});
             }
         }
 
@@ -37,7 +37,7 @@ namespace Domain.Books
 
         public Book GetBookById(int id)
         {
-            throw new NotImplementedException();
+            return _ListofBooks.Find(book => book.Id == id);
         }
 
         public IEnumerable<Book> GetBookByIsbn()
