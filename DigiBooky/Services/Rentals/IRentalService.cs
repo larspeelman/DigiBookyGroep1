@@ -7,6 +7,6 @@ namespace Services.Rentals
 {
     public interface IRentalService
     {
-        Rental RentABook(RentalDTO bookToLend);
+        Rental RentABook(Rental rental);
     }
 }

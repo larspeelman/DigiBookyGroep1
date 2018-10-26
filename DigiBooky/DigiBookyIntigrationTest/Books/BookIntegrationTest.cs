@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using Xunit;
 using System.Text;
-using DigiBooky;
 using Domain.Books;
 using Domain.Authors;
 using Api.DTO;
 using System.Linq;
+using Api;
 
 namespace DigiBookyTests.Books
 {
@@ -43,8 +43,8 @@ namespace DigiBookyTests.Books
                 {
                     Id = 1,
                     BookTitle = "test",
-                    Author = new Author("jef", "vermassen"),
                     Isbn = "53151531"
+                    
                 }
             };
 
@@ -56,18 +56,19 @@ namespace DigiBookyTests.Books
         [Fact]
         public async Task GetDetailsOfBook_BookFound_ReturnsOkForBook()
         {
+            DBAuthors.AuthorDB = FakedataAuthor();
+
             DBBooks.ListofBooks = new List<Book>
             {
                 new Book
                 {
-                    Id = 1,
                     BookTitle = "test",
-                    Author = new Author("jef", "vermassen"),
+                    AuthorId = "1",
                     Isbn = "53151531"
                 }
             };
 
-            var response = await _client.GetAsync("/api/book/1");
+            var response = await _client.GetAsync("/api/book/0");
             var responseString = await response.Content.ReadAsStringAsync();
             var bookInfo = JsonConvert.DeserializeObject<BookDTO>(responseString);
 
@@ -78,32 +79,34 @@ namespace DigiBookyTests.Books
         [Fact]
         public async Task GetAllBooks_ListOfBooksFound_ReturnAllBooks()
         {
-            BookMapper bm = new BookMapper();
+            DBAuthors.AuthorDB = FakedataAuthor();
             List<Book> testListOfBooks = new List<Book>
                  {
                 new Book
                 {
-                    Id = 1,
                     BookTitle = "test",
-                    Author = new Author("jef", "vermassen"),
+                    AuthorId = "1",
                     Isbn = "53151531"
                 }
             };
             DBBooks.ListofBooks = testListOfBooks;
-
-            List<BookDTO> expectedList = testListOfBooks.Select(book =>
-            {
-                BookDTO newbook = bm.BooksMapper(book);
-                return newbook;
-            }).ToList();
-
-            var response = await _client.GetAsync("/api/book/GetAllBooks");
+            var response = await _client.GetAsync("/api/book");
             var responseString = await response.Content.ReadAsStringAsync();
             var listofbooks = JsonConvert.DeserializeObject<List<BookDTO>>(responseString);
 
+            Assert.Single(listofbooks);
 
-            Assert.Equal(expectedList, listofbooks);
+        }
 
+        public  List<Author> FakedataAuthor()
+        {
+            List<Author> authorList = new List<Author>
+            {
+                new Author("Jef", "Depaepe"),
+                new Author("Jos", "Schuurlink"),
+                new Author("Guido", "Gazelle"),
+            };
+            return authorList;
         }
 
         

@@ -10,5 +10,6 @@ namespace Api.Helper
     public interface IRentalMapper
     {
         RentalDTO FromRentalToRentalDTO(Rental rental);
+        Rental FromRentalDTOToRental(RentalDTO rentalDTO);
     }
 }

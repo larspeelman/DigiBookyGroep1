@@ -9,15 +9,19 @@ namespace Api.Helper
 {
     public class MapperUser: IMapperUser
     {
-        public User FromDTOUserToUser(UserDTO userDTO)
+        public MapperUser()
+        {
+        }
+
+        public User FromUserDTOWithIdToUser(UserDTOWithIdentificationNumber userDTO)
         {
 
             return new User
             {
+                IdentificationNumber = userDTO.UserIdentification,
                 Birthdate = userDTO.Birthdate,
                 FirstName = userDTO.FirstName,
                 LastName = userDTO.LastName,
-                Id = userDTO.Id,
                 City = userDTO.City,
                 PostalCode = userDTO.PostalCode,
                 Email = userDTO.Email,
@@ -28,11 +32,12 @@ namespace Api.Helper
                 
         }
 
-        public UserDTO FromUserToUserDTO(User user)
+        public UserDTOWithoutIdentificationNumber FromUserToUserDTOWithoutId(User user)
         {
 
-            return new UserDTO
+            return new UserDTOWithoutIdentificationNumber
             {
+                
                 Birthdate = user.Birthdate,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -46,5 +51,6 @@ namespace Api.Helper
             };
 
         }
+        
     }
 }

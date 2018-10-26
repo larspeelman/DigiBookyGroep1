@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Domain.Authors;
 using Domain.Books;
 using Microsoft.AspNetCore;
@@ -21,15 +22,17 @@ namespace Api
         private static void InitBooks()
         {
             Random red = new Random();
-            Author[] authorList = new Author[]
+            List<Author> authorList = new List<Author>
             {
                 new Author("Jef", "Depaepe"),
                 new Author("Jos", "Schuurlink"),
-                new Author("Guido", "Gazelle")
+                new Author("Guido", "Gazelle"),
             };
+            DBAuthors.AuthorDB = authorList;
+
             for (int bookCount = 1; bookCount < 50; bookCount++)
             {
-                DBBooks.ListofBooks.Add(new Book { BookTitle = $"BookTitle{bookCount}", Author = authorList[red.Next(0, 3)], Isbn = "isbn" + bookCount.ToString() });
+                DBBooks.ListofBooks.Add(new Book { BookTitle = $"BookTitle{bookCount}", AuthorId = red.Next(1, 4).ToString(), Isbn = "isbn" + bookCount.ToString() });
             }
         }
     }

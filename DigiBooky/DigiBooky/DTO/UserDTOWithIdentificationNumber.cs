@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Domain.Users;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain.Users;
 
 namespace Api.DTO
 {
-    public class UserDTO
+    public class UserDTOWithIdentificationNumber
     {
-        public int Id { get; set; }
+        public string UserIdentification { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Birthdate { get; set; }

@@ -17,7 +17,7 @@ namespace DigiBookyTests.Users
             MapperUser mapperUser = new MapperUser();
 
             //When
-            var testUser = mapperUser.FromDTOUserToUser(new UserDTO());
+            var testUser = mapperUser.FromUserDTOWithIdToUser(new UserDTOWithIdentificationNumber());
             User user1 = new User();
             //then
             Assert.IsType(user1.GetType(), testUser);
@@ -30,8 +30,8 @@ namespace DigiBookyTests.Users
             MapperUser mapperUser = new MapperUser();
 
             //When
-            var testUser = mapperUser.FromUserToUserDTO(new User());
-            UserDTO user1 = new UserDTO();
+            var testUser = mapperUser.FromUserToUserDTOWithoutId(new User());
+            UserDTOWithoutIdentificationNumber user1 = new UserDTOWithoutIdentificationNumber();
             //then
             Assert.IsType(user1.GetType(), testUser);
         }

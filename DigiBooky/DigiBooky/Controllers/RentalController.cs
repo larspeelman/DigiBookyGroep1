@@ -48,6 +48,7 @@ namespace Api.Controllers
             {
                 return BadRequest("bad input");
             }
+            return Ok(rental);
         }
 
         // PUT: api/Rental/5

@@ -1,4 +1,5 @@
-﻿using Domain.Users;
+﻿using Domain.Authors;
+using Domain.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -73,6 +74,7 @@ namespace DigiBookyTests.Users
             UserRepository userRepository = new UserRepository();
             User testUser = GetTestUser();
             userRepository.Save(testUser);
+            DBAuthors.AuthorDB = FakedataAuthor();
             //then
             Assert.True(userRepository.SetUserAsLibarian(1).RoleOfThisUser == Roles.Role.Libarian);
         }
@@ -85,6 +87,17 @@ namespace DigiBookyTests.Users
             user.Birthdate = new DateTime(1987, 4, 21);
             user.Id = 1;
             return user;
+        }
+
+        public List<Author> FakedataAuthor()
+        {
+            List<Author> authorList = new List<Author>
+            {
+                new Author("Jef", "Depaepe"),
+                new Author("Jos", "Schuurlink"),
+                new Author("Guido", "Gazelle"),
+            };
+            return authorList;
         }
     }
 }

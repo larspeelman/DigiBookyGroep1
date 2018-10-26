@@ -1,5 +1,6 @@
 ﻿using Api.DTO;
 using Api.Helper;
+using Domain.Authors;
 using Domain.Books;
 using Domain.Users;
 using Microsoft.AspNetCore.Builder;
@@ -27,13 +28,13 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc();
             services.AddSingleton<IBookService, BookService>();
             services.AddSingleton<IRentalService, RentalService>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IUserService, UserService>()
                     .AddSingleton<IDBBookRepository, DBBookRepository>()
-                    .AddSingleton<IBookMapper,BookMapper>()
+                    .AddSingleton<IBookMapper, BookMapper>()
                     .AddSingleton<IMapperUser, MapperUser>();
             services.AddAuthorization(options =>
             {

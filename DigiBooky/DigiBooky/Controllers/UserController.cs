@@ -30,9 +30,9 @@ namespace Api.Controllers
         // GET: api/User
         [HttpGet]
         [Authorize(Roles = "Administrator")]
-        public IEnumerable<UserDTO> Get()
+        public IEnumerable<UserDTOWithoutIdentificationNumber> Get()
         {
-            return _userService.GetAllUsers().Select(user => _mapperUser.FromUserToUserDTO(user));
+            return _userService.GetAllUsers().Select(user => _mapperUser.FromUserToUserDTOWithoutId(user));
         }
 
         // GET: api/User/5
@@ -45,27 +45,27 @@ namespace Api.Controllers
         // POST: api/User
         [HttpPost]
         //[Authorize(Roles = "Administrator")]
-        public ActionResult<UserDTO> RegisterNewUser([FromBody] UserDTO userDTOToCreate)
+        public ActionResult<UserDTOWithoutIdentificationNumber> RegisterNewUser([FromBody] UserDTOWithIdentificationNumber userDTOToCreate)
         {
-            var user = _userService.CreateNewUser(_mapperUser.FromDTOUserToUser(userDTOToCreate));
+            var user = _userService.CreateNewUser(_mapperUser.FromUserDTOWithIdToUser(userDTOToCreate));
             if (user == null)
             {
               return BadRequest("BAD INPUT");
             }
 
-            return Ok(_mapperUser.FromUserToUserDTO(user));
+            return Ok(_mapperUser.FromUserToUserDTOWithoutId(user));
         }
 
         [HttpPut("{id}")]
         [Authorize(Roles = "Administrator")]
-        public ActionResult<UserDTO> RegiserLibarian(int id)
+        public ActionResult<UserDTOWithoutIdentificationNumber> RegiserLibarian(int id)
         {
             var user = _userService.SetUserAsLibarian(id);
             if (user == null)
             {
                 return BadRequest("BAD INPUT");
             }
-            return Ok(_mapperUser.FromUserToUserDTO(user));
+            return Ok(_mapperUser.FromUserToUserDTOWithoutId(user));
             
         }
 

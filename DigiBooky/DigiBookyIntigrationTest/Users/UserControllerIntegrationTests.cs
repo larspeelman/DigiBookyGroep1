@@ -30,10 +30,10 @@ namespace DigiBookyIntigrationTest.Users
         public async Task RegisterNewUser()
         {
             // Arrange
-            UserDTO testUser = new UserDTO();
+            UserDTOWithIdentificationNumber testUser = new UserDTOWithIdentificationNumber();
             testUser.Email = "xxxx@hotmail.com";
             testUser.Birthdate = new DateTime(1987, 4, 21);
-            testUser.Id = "LP_21041987";
+            testUser.UserIdentification = "LP_21041987";
             var content = JsonConvert.SerializeObject(testUser);
             var stringContent = new StringContent(content, Encoding.UTF8, "application/json");
 
@@ -43,8 +43,8 @@ namespace DigiBookyIntigrationTest.Users
             // Assert
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
-            var returnUser = JsonConvert.DeserializeObject<User>(responseString);
-            Assert.Equal("LP_21041987",returnUser.IdentificationNumber);
+            var returnUser = JsonConvert.DeserializeObject<UserDTOWithoutIdentificationNumber>(responseString);
+            Assert.Equal("xxxx@hotmail.com", returnUser.Email);
         }
     }
 }
