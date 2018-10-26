@@ -4,12 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Api.DTO;
 using Api.Helper;
+using Domain.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Users;
 
 namespace Api.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -26,9 +29,10 @@ namespace Api.Controllers
 
         // GET: api/User
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Authorize(Roles = "Administrator")]
+        public IEnumerable<UserDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _userService.GetAllUsers().Select(user => _mapperUser.FromUserToUserDTO(user));
         }
 
         // GET: api/User/5
@@ -40,6 +44,7 @@ namespace Api.Controllers
 
         // POST: api/User
         [HttpPost]
+        //[Authorize(Roles = "Administrator")]
         public ActionResult<UserDTO> RegisterNewUser([FromBody] UserDTO userDTOToCreate)
         {
             var user = _userService.CreateNewUser(_mapperUser.FromDTOUserToUser(userDTOToCreate));
@@ -51,11 +56,24 @@ namespace Api.Controllers
             return Ok(_mapperUser.FromUserToUserDTO(user));
         }
 
-        // PUT: api/User/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [Authorize(Roles = "Administrator")]
+        public ActionResult<UserDTO> RegiserLibarian(int id)
         {
+            var user = _userService.SetUserAsLibarian(id);
+            if (user == null)
+            {
+                return BadRequest("BAD INPUT");
+            }
+            return Ok(_mapperUser.FromUserToUserDTO(user));
+            
         }
+
+        //// PUT: api/User/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]

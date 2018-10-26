@@ -10,5 +10,8 @@ namespace Services.Users
         bool IsIdentificationNumberValid(string identificationNumber, string birthdate);
         bool IsEmailAdressValid(string email);
         User CreateNewUser(User userToCreate);
+        IEnumerable<User> GetAllUsers();
+
+        User SetUserAsLibarian(int id);
     }
 }

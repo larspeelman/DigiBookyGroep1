@@ -9,11 +9,11 @@ namespace Services.Users
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _dbUsers;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(IUserRepository _dbUsers)
+        public UserService(IUserRepository userRepository)
         {
-            this._dbUsers = _dbUsers;
+            this._userRepository = userRepository;
         }
 
         public bool IsIdentificationNumberValid(string identificationNumber, string birthdate)
@@ -46,11 +46,21 @@ namespace Services.Users
             if (IsEmailAdressValid(userToCreate.Email)
                 && IsIdentificationNumberValid(userToCreate.IdentificationNumber, userToCreate.Birthdate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
             {
-                _dbUsers.Save(userToCreate);
+                _userRepository.Save(userToCreate);
                 return userToCreate;
             }
             
             return null;
+        }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _userRepository.GetAllUsers();
+        }
+
+        public User SetUserAsLibarian(int id)
+        {
+            return _userRepository.SetUserAsLibarian(id);
         }
     }
 }

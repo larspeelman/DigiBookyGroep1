@@ -29,12 +29,11 @@ namespace DigiBookyIntigrationTest.Users
         [Fact]
         public async Task RegisterNewUser()
         {
- 
             // Arrange
             UserDTO testUser = new UserDTO();
             testUser.Email = "xxxx@hotmail.com";
             testUser.Birthdate = new DateTime(1987, 4, 21);
-            testUser.IdentificationNumber = "LP_21041987";
+            testUser.Id = "LP_21041987";
             var content = JsonConvert.SerializeObject(testUser);
             var stringContent = new StringContent(content, Encoding.UTF8, "application/json");
 

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace DigiBookyTests.Users
 {
-    public class DBUserTest
+    public class UserRepositoryTest
     {
         [Fact]
         public void GivenDBUsers_WhenRegisterNewUniqueUser_ThenUserInDB()
@@ -64,6 +64,27 @@ namespace DigiBookyTests.Users
 
             //Then
             Assert.DoesNotContain(testUser2, DBUsers.UsersInLibrary);
+        }
+
+        [Fact]
+        public void GivenUserService_WhenRegisterLiberianOfExistingUserAndAdministrator_ThenReturnUserAsLibarian()
+        {
+            //Given
+            UserRepository userRepository = new UserRepository();
+            User testUser = GetTestUser();
+            userRepository.Save(testUser);
+            //then
+            Assert.True(userRepository.SetUserAsLibarian(1).RoleOfThisUser == Roles.Role.Libarian);
+        }
+
+        private User GetTestUser()
+        {
+            User user = new User();
+            user.IdentificationNumber = "LP_21041987";
+            user.Email = "xxx@hotmail.com";
+            user.Birthdate = new DateTime(1987, 4, 21);
+            user.Id = 1;
+            return user;
         }
     }
 }

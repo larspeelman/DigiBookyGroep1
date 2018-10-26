@@ -37,7 +37,16 @@ namespace DigiBooky
             services.AddSingleton<IBookService, BookService>();
             services.AddSingleton<IRentalService, RentalService>();
             services.AddSingleton<IUserRepository, UserRepository>();
-            services.AddSingleton<IUserService, UserService>().AddSingleton<IDBBooks, DBBooks>().AddSingleton<IMapperUser, MapperUser>();
+            services.AddSingleton<IUserService, UserService>()
+                    .AddSingleton<IDBBooks, DBBooks>()
+                    .AddSingleton<IMapperUser, MapperUser>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ModeratorAccess",
+                    policy => policy.RequireRole(Roles.Role.Libarian.ToString()
+                                               , Roles.Role.Administrator.ToString()));
+
+            });
             services.AddSwagger();
         }
 
