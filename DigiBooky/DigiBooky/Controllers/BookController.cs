@@ -27,7 +27,7 @@ namespace Api.Controllers
 
         // GET: api/Book/GetAllBooks
         [HttpGet]
-        [Route("GetAllBooks")]
+        //[Route("GetAllBooks")]
         public IEnumerable<BookDTO> GetAllBooks()
         {
             return _bookService.GetAllBooks().Select(_bookMapper.BooksMapper);
@@ -35,7 +35,7 @@ namespace Api.Controllers
 
         // GET: api/Book/GetOneBook/5
         [HttpGet("{isbn}", Name = "GetBookByIsdn")]
-        [Route("GetBookByIsdn")]
+        //[Route("GetBookByIsdn")]
         public ActionResult<BookDTO> Get(string isbn)
         {
                 Book foundBook = _bookService.GetBookByIsdn(isbn);

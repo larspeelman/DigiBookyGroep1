@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Api.DTO;
 using Api.Helper;
 using Domain.Books;
 using Domain.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using NJsonSchema;
 using NSwag.AspNetCore;
 using Services.Books;
 using Services.Rentals;
 using Services.Users;
 
-namespace DigiBooky
+namespace Api
 {
     public class Startup
     {
@@ -38,7 +32,8 @@ namespace DigiBooky
             services.AddSingleton<IRentalService, RentalService>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IUserService, UserService>()
-                    .AddSingleton<IDBBooks, DBBooks>()
+                    .AddSingleton<IDBBookRepository, DBBookRepository>()
+                    .AddSingleton<IBookMapper,BookMapper>()
                     .AddSingleton<IMapperUser, MapperUser>();
             services.AddAuthorization(options =>
             {
@@ -67,7 +62,7 @@ namespace DigiBooky
                 settings.GeneratorSettings.DefaultPropertyNameHandling =
                     PropertyNameHandling.CamelCase;
             });
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
