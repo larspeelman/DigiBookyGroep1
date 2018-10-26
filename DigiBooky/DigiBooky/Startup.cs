@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Api.Helper;
 using Domain.Books;
+using Domain.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +36,7 @@ namespace DigiBooky
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<IBookService, BookService>();
             services.AddSingleton<IRentalService, RentalService>();
+            services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IUserService, UserService>().AddSingleton<IDBBooks, DBBooks>().AddSingleton<IMapperUser, MapperUser>();
             services.AddSwagger();
         }

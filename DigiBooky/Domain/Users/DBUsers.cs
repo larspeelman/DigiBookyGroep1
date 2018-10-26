@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Domain.Users
 {
-    public interface IDBUsers
+    public static class DBUsers
     {
-        void Save(User userToSave);
+        public static List<User> UsersInLibrary = new List<User>();
     }
 }

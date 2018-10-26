@@ -15,7 +15,7 @@ namespace DigiBookyTests.Users
         [Fact]
         public void GivenUniqueIdentificationNumber_WhenIsIdentificationNumberValid_ThenReturnTrue()
         {
-            IDBUsers DBUsersStub = Substitute.For<IDBUsers>();
+            IUserRepository DBUsersStub = Substitute.For<IUserRepository>();
             //Given
             DateTime birthdate = new DateTime(1987, 4, 21);
             string BD = birthdate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -35,7 +35,7 @@ namespace DigiBookyTests.Users
         public void GivenUniqueFalseIdentificationNumber_WhenIsIdentificationNumberValid_ThenReturnFalse()
         {
             //Given
-            IDBUsers DBUsersStub = Substitute.For<IDBUsers>();
+            IUserRepository DBUsersStub = Substitute.For<IUserRepository>();
             DateTime birthdate = new DateTime(1987, 4, 21);
             string BD = birthdate.ToString("dd/MM/yyyy");
             string uniqueId = "LP88_21041987";
@@ -53,7 +53,7 @@ namespace DigiBookyTests.Users
         {
             //Given
             string email = "xxxx@hotmail.com";
-            IDBUsers DBUsersStub = Substitute.For<IDBUsers>();
+            IUserRepository DBUsersStub = Substitute.For<IUserRepository>();
             UserService userService = new UserService(DBUsersStub);
 
             //When
@@ -67,7 +67,7 @@ namespace DigiBookyTests.Users
         public void GivenFalseUniqueEmail_WhenIsEmailAdressValid_ThenReturnFalse()
         {
             //Given
-            IDBUsers DBUsersStub = Substitute.For<IDBUsers>();
+            IUserRepository DBUsersStub = Substitute.For<IUserRepository>();
             string email = "xxxx@hotmail@com";
             UserService userService = new UserService(DBUsersStub);
 
@@ -82,7 +82,7 @@ namespace DigiBookyTests.Users
         public void GivenUserService_WhenCreatingNewUsers_ThenDBUsersReceiveCallRegisterNewUser()
         {
             //Given
-            IDBUsers DBUsersStub = Substitute.For<IDBUsers>();
+            IUserRepository DBUsersStub = Substitute.For<IUserRepository>();
             User testUser = new User();
             testUser.Email = "xxxx@hotmail.com";
             testUser.Birthdate = new DateTime(1987, 4, 21);

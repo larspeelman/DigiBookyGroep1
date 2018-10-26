@@ -9,9 +9,9 @@ namespace Services.Users
 {
     public class UserService : IUserService
     {
-        private readonly IDBUsers _dbUsers;
+        private readonly IUserRepository _dbUsers;
 
-        public UserService(IDBUsers _dbUsers)
+        public UserService(IUserRepository _dbUsers)
         {
             this._dbUsers = _dbUsers;
         }

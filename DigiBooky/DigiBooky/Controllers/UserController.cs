@@ -41,12 +41,14 @@ namespace Api.Controllers
         // POST: api/User
         [HttpPost]
         public ActionResult<UserDTO> RegisterNewUser([FromBody] UserDTO userDTOToCreate)
-        {                
-            if (_userService.CreateNewUser(_mapperUser.FromDTOUserToUser(userDTOToCreate)) == null)
+        {
+            var user = _userService.CreateNewUser(_mapperUser.FromDTOUserToUser(userDTOToCreate));
+            if (user == null)
             {
               return BadRequest("BAD INPUT");
             }
-            return Ok(User);
+
+            return Ok(_mapperUser.FromUserToUserDTO(user));
         }
 
         // PUT: api/User/5

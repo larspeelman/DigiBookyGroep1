@@ -12,58 +12,58 @@ namespace DigiBookyTests.Users
         public void GivenDBUsers_WhenRegisterNewUniqueUser_ThenUserInDB()
         {
             //Given
-            DBUser dbUser = new Domain.Users.DBUser();
+            UserRepository dbUsers = new Domain.Users.UserRepository();
             User testUser = new User();
             testUser.IdentificationNumber = "LP_21041987";
             testUser.Email = "xxx@hotmail.com";
 
             //When
-            dbUser.Save(testUser);
+            dbUsers.Save(testUser);
 
             //Then
-            Assert.Contains(testUser, dbUser.UserDB);
+            Assert.Contains(testUser, DBUsers.UsersInLibrary);
         }
 
         [Fact]
         public void GivenDBUsers_WhenRegisterUserWithNoUniqueEmail_ThenUserNotInDB()
         {
             //Given
-            DBUser dbUser = new DBUser();
+            UserRepository dbUsers = new UserRepository();
             User testUser = new User();
             testUser.IdentificationNumber = "LP_21041987";
             testUser.Email = "xxx@hotmail.com";
-            dbUser.Save(testUser);
+            dbUsers.Save(testUser);
 
             User testUser2 = new User();
             testUser2.IdentificationNumber = "SP_21041987";
             testUser2.Email = "xxx@hotmail.com";
 
             //When
-            dbUser.Save(testUser2);
+            dbUsers.Save(testUser2);
 
             //Then
-            Assert.DoesNotContain(testUser2, dbUser.UserDB);
+            Assert.DoesNotContain(testUser2, DBUsers.UsersInLibrary);
         }
 
         [Fact]
         public void GivenDBUsers_WhenRegisterUserWithNoUniqueIdentificationNumber_ThenUserNotInDB()
         {
             //Given
-            DBUser dbUser = new DBUser();
+            UserRepository dbUsers = new UserRepository();
             User testUser = new User();
             testUser.IdentificationNumber = "LP_21041987";
             testUser.Email = "xxx@hotmail.com";
-            dbUser.Save(testUser);
+            dbUsers.Save(testUser);
 
             User testUser2 = new User();
             testUser2.IdentificationNumber = "LP_21041987";
             testUser2.Email = "xxxx@hotmail.com";
 
             //When
-            dbUser.Save(testUser2);
+            dbUsers.Save(testUser2);
 
             //Then
-            Assert.DoesNotContain(testUser2, dbUser.UserDB);
+            Assert.DoesNotContain(testUser2, DBUsers.UsersInLibrary);
         }
     }
 }
