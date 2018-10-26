@@ -8,25 +8,25 @@ namespace Services.Books
 {
     public class BookService: IBookService
     {
-        private readonly IDBBooks _dbBook;
+        private readonly IDBBookRepository _IDBBookRepository;
 
-        public BookService(IDBBooks dbBook)
+        public BookService(IDBBookRepository dbBook)
         {
-            _dbBook = dbBook;
+            _IDBBookRepository = dbBook;
         }
         public IEnumerable<Book> GetAllBooks()
         {
-            return _dbBook.GetAllBooks();
+            return _IDBBookRepository.GetAllBooks();
         }
 
         public Book GetBookByIsdn(string isbn)
         {
-            return _dbBook.GetAllBooks().SingleOrDefault(bk => bk.Isbn.Contains(isbn));
+            return _IDBBookRepository.GetAllBooks().SingleOrDefault(bk => bk.Isbn.Contains(isbn));
         }
 
         public Book ShowDetailsOfBook(int id)
         {
-            return _dbBook.GetBookById(id);
+            return _IDBBookRepository.GetBookById(id);
         }
     }
 }

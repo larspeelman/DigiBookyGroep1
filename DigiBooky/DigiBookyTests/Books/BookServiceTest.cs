@@ -13,7 +13,7 @@ namespace DigiBookyTests.Books
         [Fact]
         public void GivenBookService_WhenGetAllBooks_ThenDBBooksReceiceCall()
         {
-            IDBBooks dbBookstub = Substitute.For<IDBBooks>();
+            IDBBookRepository dbBookstub = Substitute.For<IDBBookRepository>();
             BookService bookService = new BookService(dbBookstub);
             bookService.GetAllBooks();
             dbBookstub.Received().GetAllBooks();
@@ -22,7 +22,7 @@ namespace DigiBookyTests.Books
         [Fact]
         public void GivenBookService_WhenGetAllBooks_ThenReturnListofbooks()
         {
-            IDBBooks dbBookstub = Substitute.For<IDBBooks>();
+            IDBBookRepository dbBookstub = Substitute.For<IDBBookRepository>();
             BookService bookService = new BookService(dbBookstub);
             IEnumerable<Book> testList = new List<Book>();
             dbBookstub.GetAllBooks().Returns(testList);
@@ -33,7 +33,7 @@ namespace DigiBookyTests.Books
         [Fact]
         public void GivenBookService_WhenShowDetailsOfBook_ThenReturnBookById()
         {
-            IDBBooks dbBookstub = Substitute.For<IDBBooks>();
+            IDBBookRepository dbBookstub = Substitute.For<IDBBookRepository>();
             BookService bookService = new BookService(dbBookstub);
             bookService.ShowDetailsOfBook(1);
             Book testBook = new Book { Id = 1, BookTitle = "test" };

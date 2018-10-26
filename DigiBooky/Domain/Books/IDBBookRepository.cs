@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Domain.Books
 {
-    public interface IDBBooks
+    public interface IDBBookRepository
     {
-        IEnumerable<Book> GetBookByIsbn();
         IEnumerable<Book> GetAllBooks();
         Book GetBookById(int id);
+        IEnumerable<Book> GetBookByIsbn();
     }
 }
