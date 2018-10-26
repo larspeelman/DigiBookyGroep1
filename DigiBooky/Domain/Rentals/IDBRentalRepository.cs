@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Domain.Rentals
 {
-    interface IDBRentals
+    interface IDBRentalRepository
     {
+        void AddRentalToDB(Rental bookToRent);
     }
 }

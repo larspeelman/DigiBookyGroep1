@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Domain.Rentals
 {
-    class DBRentals
+    public static class DBRentals
     {
+        public static List<Rental> DBRental = new List<Rental>();
     }
 }

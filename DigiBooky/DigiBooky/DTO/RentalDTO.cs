@@ -7,9 +7,9 @@ namespace Api.DTO
 {
     public class RentalDTO
     {
-        public string BookTitle { get; set; }
         public string Isbn { get; set; }
-        public string AuthorName { get; set; }
         public DateTime EndDate { get; set; }
+        public string UserIdNumber { get; set; }
+        public string UniqueRentalId { get; set; }
     }
 }
