@@ -48,7 +48,7 @@ namespace Api.Controllers
             {
                 return BadRequest("bad input");
             }
-            return Ok(rental);
+            return Ok(_rentalMapper.FromRentalToRentalDTO(rental));
         }
 
         // PUT: api/Rental/5

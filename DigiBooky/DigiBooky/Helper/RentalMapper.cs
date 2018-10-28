@@ -17,7 +17,7 @@ namespace Api.Helper
                 Isbn = rental.Isbn,
                 UniqueRentalId = rental.RentalId,
                 UserIdNumber = rental.UserId,
-                EndDate = rental.EndDate.AddDays(21)
+                EndDate = rental.EndDate
             };
         }
 
@@ -28,7 +28,7 @@ namespace Api.Helper
                 Isbn = rentalDTO.Isbn,
                 RentalId = rentalDTO.UniqueRentalId,
                 UserId = rentalDTO.UserIdNumber,
-                EndDate = rentalDTO.EndDate.AddDays(21)
+                EndDate = rentalDTO.EndDate
             };
         }
     }
