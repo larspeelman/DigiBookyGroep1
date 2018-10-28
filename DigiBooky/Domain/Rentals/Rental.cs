@@ -12,7 +12,7 @@ namespace Domain.Rentals
 
         public Book Book => ReturnBookForRental(); 
         public string UserId { get; set; }
-        public DateTime EndDate => SetDueDate();
+        public DateTime EndDate { get; set; }
         public User User =>ReturnUserForThisRental();
         public string RentalId {get; set;}
         private static int rentalCounter;
@@ -32,11 +32,6 @@ namespace Domain.Rentals
         private Book ReturnBookForRental()
         {
             return DBBooks.ListofBooks.SingleOrDefault(book => book.Isbn == Isbn);
-        }
-
-        private DateTime SetDueDate()
-        {
-            return DateTime.Now.AddDays(21);
         }
     }
 

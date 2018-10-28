@@ -22,13 +22,20 @@ namespace Services.Rentals
             var book = _bookRepository.GetBookByIsbn(rental.Isbn).SingleOrDefault(bookToFind => bookToFind.Isbn == rental.Isbn);
             if (book.BookIsRentable == true)
             {
-                rental.EndDate.AddDays(21);
+                rental.EndDate = SetDueDate();
                 book.BookIsRentable = false;
                 _rentalRepository.AddRentalToDB(rental);
                 
                
             }
             return rental;
+        }
+
+        private DateTime SetDueDate()
+        {
+            var dayToday = DateTime.Today;
+            return dayToday.AddDays(21);
+
         }
 
        

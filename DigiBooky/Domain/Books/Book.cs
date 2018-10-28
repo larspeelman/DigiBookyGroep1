@@ -27,6 +27,8 @@ namespace Domain.Books
         {
             return DBAuthors.AuthorDB.SingleOrDefault(author => author.Id == AuthorId);
         }
+
+
         public override bool Equals(object obj)
         {
             var book = obj as Book;
