@@ -33,6 +33,23 @@ namespace Domain.Rentals
         {
             return DBBooks.ListofBooks.SingleOrDefault(book => book.Isbn == Isbn);
         }
+
+        public override bool Equals(object obj)
+        {
+            var rental = obj as Rental;
+            return rental != null &&
+                   EqualityComparer<Book>.Default.Equals(Book, rental.Book) &&
+                   UserId == rental.UserId &&
+                   EndDate == rental.EndDate &&
+                   EqualityComparer<User>.Default.Equals(User, rental.User) &&
+                   RentalId == rental.RentalId &&
+                   Isbn == rental.Isbn;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Book, UserId, EndDate, User, RentalId, Isbn);
+        }
     }
 
 
