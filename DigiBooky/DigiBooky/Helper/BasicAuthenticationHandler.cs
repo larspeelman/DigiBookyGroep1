@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
@@ -49,9 +50,12 @@ namespace Digibooky_api.Helper
             if (user == null)
                 return AuthenticateResult.Fail("Invalid identificationNumber");
 
-            var claims = new[] {
-                new Claim(ClaimTypes.NameIdentifier, user.IdentificationNumber),
+
+            var claims = new List<Claim> {
+                new Claim(ClaimTypes.NameIdentifier,user.IdentificationNumber),
+                new Claim(ClaimTypes.Role, user.RoleOfThisUser.ToString()),
             };
+
             var identity = new ClaimsIdentity(claims, Scheme.Name);
             var principal = new ClaimsPrincipal(identity);
             var ticket = new AuthenticationTicket(principal, Scheme.Name);

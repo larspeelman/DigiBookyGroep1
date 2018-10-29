@@ -29,7 +29,8 @@ namespace Digibooky_api.Controllers
 
         // GET: api/User
         [HttpGet]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
+        [Authorize(Policy = "ModeratorAccess")]
         public IEnumerable<UserDTOWithoutIdentificationNumber> Get()
         {
             return _userService.GetAllUsers().Select(user => _mapperUser.FromUserToUserDTOWithoutId(user));
@@ -42,8 +43,16 @@ namespace Digibooky_api.Controllers
             return "value";
         }
 
-        // POST: api/User
-        [AllowAnonymous]
+
+        //{
+        //    "UserIdentification":"LP_21041987",
+        //    "Birthdate":"1987-04-21T00:00:00.0000",
+        //    "Email":"test@hotmail.Com",
+        //    "FirstName":"Lest",
+        //    "LastName": "Pest"
+        //}
+    // POST: api/User
+    [AllowAnonymous]
         [HttpPost]
         //[Authorize(Roles = "Administrator")]
         public ActionResult<UserDTOWithoutIdentificationNumber> RegisterNewUser([FromBody] UserDTOWithIdentificationNumber userDTOToCreate)
