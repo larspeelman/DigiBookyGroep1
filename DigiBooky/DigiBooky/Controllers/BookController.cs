@@ -26,39 +26,55 @@ namespace Digibooky_api.Controllers
         }
 
         // GET: api/Book/GetAllBooks
+        //http://localhost:49908/api/book?isbn=7&author=schuur
         [HttpGet]
         //[Route("GetAllBooks")]
         public ActionResult<IEnumerable<BookDTO>> GetAllBooks(string isbn = null, string title = null, string author = null)
         {
-            IEnumerable<Book> result;
+            List<Func<Book, bool>> delegateFuncs = new List<Func<Book, bool>>();
             if (!string.IsNullOrEmpty(isbn))
-            {
-                result = _bookService.GetBookByIsbn(isbn);
-                if (!result.Any())
-                {
-                    return BadRequest($"No books found for Isbn {isbn}");
-                }
-                return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
-            }
+                delegateFuncs.Add(delegate (Book bk) { return bk.Isbn.Contains(isbn); });
             if (!string.IsNullOrEmpty(title))
-            {
-                result = _bookService.GetBookByTitle(title);
-                if (!result.Any())
-                {
-                    return BadRequest($"No books found for title {title}");
-                }
-                return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
-            }
+                delegateFuncs.Add(delegate (Book bk) { return bk.BookTitle.ToLower().Contains(title.ToLower()); });
             if (!string.IsNullOrEmpty(author))
+                delegateFuncs.Add(delegate (Book bk) { return string.Concat(bk.Author.FirstName, bk.Author.LastName).ToLower().Contains(author.ToLower()); });
+
+            IEnumerable<Book> result = _bookService.GetBookByFilter(delegateFuncs);
+            if (!result.Any())
             {
-                result = _bookService.GetBookByAuthor(author);
-                if (!result.Any())
-                {
-                    return BadRequest($"No books found for author {author}");
-                }
-                return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+                return BadRequest($"No books found for selection");
             }
-            return Ok(_bookService.GetAllBooks().Select(_bookMapper.BooksMapper));
+            return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+
+            //IEnumerable<Book> result;
+            //if (!string.IsNullOrEmpty(isbn))
+            //{
+            //    result = _bookService.GetBookByIsbn(isbn);
+            //    if (!result.Any())
+            //    {
+            //        return BadRequest($"No books found for Isbn {isbn}");
+            //    }
+            //    return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+            //}
+            //if (!string.IsNullOrEmpty(title))
+            //{
+            //    result = _bookService.GetBookByTitle(title);
+            //    if (!result.Any())
+            //    {
+            //        return BadRequest($"No books found for title {title}");
+            //    }
+            //    return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+            //}
+            //if (!string.IsNullOrEmpty(author))
+            //{
+            //    result = _bookService.GetBookByAuthor(author);
+            //    if (!result.Any())
+            //    {
+            //        return BadRequest($"No books found for author {author}");
+            //    }
+            //    return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+            //}
+            //return Ok(_bookService.GetAllBooks().Select(_bookMapper.BooksMapper));
         }
 
 
