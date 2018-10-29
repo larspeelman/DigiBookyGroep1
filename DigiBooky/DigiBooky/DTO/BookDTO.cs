@@ -10,6 +10,7 @@ namespace Digibooky_api.DTO
         public string BookTitle { get; set; }
         public string Isbn { get; set; }
         public string AuthorName { get; set; }
+        public int BookId { get; set; }
 
         public override bool Equals(object obj)
         {

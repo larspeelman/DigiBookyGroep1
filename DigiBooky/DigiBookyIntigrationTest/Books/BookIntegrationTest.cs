@@ -34,6 +34,13 @@ namespace Digibooky_IntigrationTest.Books
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        private void Initialize()
+        {
+            DBBooks.ListofBooks.Clear();
+            DBAuthors.AuthorDB.Clear();
+            Book.CounterOfBooks = 0;
+        }
+
         [Fact]
         public async Task GetDetailsOfBook_BookNotFound_ReturnsBadRequest()
         {
@@ -56,17 +63,19 @@ namespace Digibooky_IntigrationTest.Books
         [Fact]
         public async Task GetDetailsOfBook_BookFound_ReturnsOkForBook()
         {
+            Initialize();
             DBAuthors.AuthorDB = FakedataAuthor();
-
             DBBooks.ListofBooks = new List<Book>
             {
                 new Book
                 {
                     BookTitle = "test",
-                    AuthorId = "1",
+                    AuthorId = DBAuthors.AuthorDB[0].Id.ToString(),
                     Isbn = "53151531"
                 }
             };
+
+            var count = Book.CounterOfBooks;
 
             var response = await _client.GetAsync("/api/book/0");
             var responseString = await response.Content.ReadAsStringAsync();
