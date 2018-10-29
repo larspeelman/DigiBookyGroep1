@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Digibooky_domain.Books;
 
 namespace Digibooky_services.Books
@@ -19,14 +20,24 @@ namespace Digibooky_services.Books
             return _IDBBookRepository.GetAllBooks();
         }
 
-        public Book GetBookByIsdn(string isbn)
+        public IEnumerable<Book> GetBookByIsbn(string isbn)
         {
-            return _IDBBookRepository.GetAllBooks().SingleOrDefault(bk => bk.Isbn.Contains(isbn));
+            return _IDBBookRepository.GetAllBooks().Where(bk => bk.Isbn.Contains(isbn));
         }
 
         public Book ShowDetailsOfBook(int id)
         {
             return _IDBBookRepository.GetBookById(id);
+        }
+
+        public IEnumerable<Book> GetBookByTitle(string title)
+        {
+            return _IDBBookRepository.GetAllBooks().Where(book => book.BookTitle.Contains(title));
+        }
+
+        public IEnumerable<Book> GetBookByAuthor(string author)
+        {
+            return _IDBBookRepository.GetAllBooks().Where(book => string.Concat(book.Author.FirstName, book.Author.LastName).Contains(author));
         }
     }
 }

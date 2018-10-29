@@ -34,23 +34,37 @@ namespace Digibooky_api.Controllers
         }
 
         // GET: api/Book/GetOneBook/5
-        [HttpGet("{isbn}", Name = "GetBookByIsdn")]
-        //[Route("GetBookByIsdn")]
-        public ActionResult<BookDTO> Get(string isbn)
+        [HttpGet]
+        public ActionResult<IEnumerable<BookDTO>> GetBookByIsbn([FromQuery (Name = "isbn")] string isbn)
         {
-                Book foundBook = _bookService.GetBookByIsdn(isbn);
-                if (foundBook == null)
-                {
-                    return BadRequest($"Book with id: {isbn} not found");
-                }
-                return Ok(_bookMapper.BooksMapper(foundBook));
+            var result = _bookService.GetBookByIsbn(isbn);
+            if (result.Count() == 0)
+            {
+                return BadRequest($"No books found for title {isbn}");
+            }
+            return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
         }
 
-        [HttpGet("{title}", Name = "GetBookTitle")]
-        [Route("GetBookTitle")]
-        public ActionResult<IEnumerable<BookDTO>> GetBookTitle(string title)
+        [HttpGet]
+        public ActionResult<IEnumerable<BookDTO>> GetBookTitle([FromQuery (Name = "title")] string title)
         {
-            return BadRequest($"Book with Title: {title} not found");
+            var result = _bookService.GetBookByTitle(title);
+            if (result.Count() == 0)
+            {
+                return BadRequest($"No books found for title {title}");
+            }
+            return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<BookDTO>> GetBookByAuthor([FromQuery(Name ="author")]string author)
+        {
+            var result = _bookService.GetBookByAuthor(author);
+            if (result.Count() == 0)
+            {
+                return BadRequest($"No books found for author {author}");
+            }
+            return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
         }
 
         [HttpGet("{id}")]

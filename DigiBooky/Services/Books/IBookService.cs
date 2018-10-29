@@ -8,7 +8,9 @@ namespace Digibooky_services.Books
     public interface IBookService
     {
         IEnumerable<Book> GetAllBooks();
-        Book GetBookByIsdn(string isbn);
+        IEnumerable<Book> GetBookByIsbn(string isbn);
+        IEnumerable<Book> GetBookByTitle(string title);
         Book ShowDetailsOfBook(int id);
+        IEnumerable<Book> GetBookByAuthor(string title);
     }
 }
