@@ -28,6 +28,7 @@ namespace Digibooky_api
             DBUsers.UsersInLibrary.Add(new User()
             {
                 IdentificationNumber = "LP_21041987",
+                Birthdate = new DateTime(1987, 4, 21),
                 Email = "xxxx@hotmail.com",
                 RoleOfThisUser = Roles.Role.Administrator
             });

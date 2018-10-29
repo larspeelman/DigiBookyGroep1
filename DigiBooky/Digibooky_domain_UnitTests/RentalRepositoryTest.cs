@@ -29,7 +29,7 @@ namespace Digibooky_domain_UnitTests
         public void GivenRentalRepository_WhenAddRentalToDB_ThenNewRentalInRentalDB()
         {
             //Given
-            Rental testRental = new Rental() { UserId = "LP_21051987", Isbn = "isbnTest" };
+            Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTest" };
 
             //When
             _rentalRepository.AddRentalToDB(testRental);

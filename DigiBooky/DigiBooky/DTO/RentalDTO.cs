@@ -11,5 +11,12 @@ namespace Digibooky_api.DTO
         public DateTime EndDate { get; set; }
         public string UserIdNumber { get; set; }
         public string UniqueRentalId { get; set; }
+        private static int rentalCounter;
+
+        public RentalDTO()
+        {
+            UniqueRentalId = rentalCounter.ToString();
+            rentalCounter++;
+        }
     }
 }

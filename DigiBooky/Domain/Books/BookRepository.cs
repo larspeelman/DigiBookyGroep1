@@ -1,6 +1,7 @@
 ﻿using Digibooky_domain.Books;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Digibooky_domain.Books
@@ -20,7 +21,7 @@ namespace Digibooky_domain.Books
 
         public IEnumerable<Book> GetBookByIsbn(string isbn)
         {
-            throw new NotImplementedException();
+            return DBBooks.ListofBooks.Where(book => book.Isbn == isbn);
         }
     }
 }

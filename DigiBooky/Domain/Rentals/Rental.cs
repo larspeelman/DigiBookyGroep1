@@ -2,6 +2,7 @@
 using Digibooky_domain.Users;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
@@ -10,23 +11,22 @@ namespace Digibooky_domain.Rentals
     public class Rental
     {
 
-        public string UserId { get; set; }
+        public string UserIdNumber { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime EndDate { get; set; }
         public string RentalId {get; set;}
-        private static int rentalCounter;
         public string Isbn { get; set; }
         public Book Book => ReturnBookForRental(); 
         public User User =>ReturnUserForThisRental();
 
         public Rental()
         {
-            RentalId = rentalCounter.ToString();
-            rentalCounter++;
         }
 
         private User ReturnUserForThisRental()
         {
-            return DBUsers.UsersInLibrary.SingleOrDefault(user => user.IdentificationNumber == UserId);
+            return DBUsers.UsersInLibrary.SingleOrDefault(user => user.IdentificationNumber == UserIdNumber);
         }
 
         private Book ReturnBookForRental()
@@ -39,7 +39,7 @@ namespace Digibooky_domain.Rentals
             var rental = obj as Rental;
             return rental != null &&
                    EqualityComparer<Book>.Default.Equals(Book, rental.Book) &&
-                   UserId == rental.UserId &&
+                   UserIdNumber == rental.UserIdNumber &&
                    EndDate == rental.EndDate &&
                    EqualityComparer<User>.Default.Equals(User, rental.User) &&
                    RentalId == rental.RentalId &&
@@ -48,7 +48,7 @@ namespace Digibooky_domain.Rentals
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Book, UserId, EndDate, User, RentalId, Isbn);
+            return HashCode.Combine(Book, UserIdNumber, EndDate, User, RentalId, Isbn);
         }
     }
 

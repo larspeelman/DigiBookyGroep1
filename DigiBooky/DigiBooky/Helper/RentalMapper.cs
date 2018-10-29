@@ -17,7 +17,7 @@ namespace Digibooky_api.Helper
             {
                 Isbn = rental.Isbn,
                 UniqueRentalId = rental.RentalId,
-                UserIdNumber = rental.UserId,
+                UserIdNumber = rental.UserIdNumber,
                 EndDate = rental.EndDate
             };
         }
@@ -28,7 +28,7 @@ namespace Digibooky_api.Helper
             {
                 Isbn = rentalDTO.Isbn,
                 RentalId = rentalDTO.UniqueRentalId,
-                UserId = rentalDTO.UserIdNumber,
+                UserIdNumber = rentalDTO.UserIdNumber,
                 EndDate = rentalDTO.EndDate
             };
         }

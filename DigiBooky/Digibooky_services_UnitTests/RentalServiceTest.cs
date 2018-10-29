@@ -40,7 +40,7 @@ namespace Digibooky_services_UnitTests
         {
             Initialize_RentalServiceTest();
             //Given
-            Rental testRental = new Rental() { UserId = "LP_21051987", Isbn = "isbnTest" };
+            Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTest" };
 
             //when
             _rentalService.RentABook(testRental);
@@ -54,7 +54,7 @@ namespace Digibooky_services_UnitTests
         {
             Initialize_RentalServiceTest();
             //Given
-            Rental testRental = new Rental() { UserId = "LP_21051987", Isbn = "isbnTest" };
+            Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTest" };
             DBBooks.ListofBooks[0].BookIsRentable = false;
 
             //when
@@ -69,7 +69,7 @@ namespace Digibooky_services_UnitTests
         {
             Initialize_RentalServiceTest();
             //Given
-            Rental testRental = new Rental() { UserId = "LP_21051987", Isbn = "isbnTestFAKE" };
+            Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTestFAKE" };
 
             //when
             _rentalService.RentABook(testRental);
