@@ -14,6 +14,7 @@ namespace Digibooky_domain_UnitTests
         public void GivenBookDB_WhenGetAllBooks_ThenReturnFullDatabase()
         {
             BookRepository dBBooks = new BookRepository();
+            DBBooks.ListofBooks.Clear();
             Random red = new Random();
             Author[] authorList = new Author[]
             {
@@ -26,7 +27,7 @@ namespace Digibooky_domain_UnitTests
                 DBBooks.ListofBooks.Add(new Book { BookTitle = $"BookTitle{bookCount}", AuthorId = red.Next(0, 3).ToString(), Isbn = "isbn" + bookCount.ToString() });
             }
             
-            Assert.Equal(50, dBBooks.GetAllBooks().Count());
+            Assert.Equal(49, dBBooks.GetAllBooks().Count());
         }
 
     }

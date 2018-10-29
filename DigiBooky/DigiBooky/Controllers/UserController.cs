@@ -67,7 +67,8 @@ namespace Digibooky_api.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
+        [Authorize(Policy = "ModeratorAccess")]
         public ActionResult<UserDTOWithoutIdentificationNumber> RegisterLibrarian(int id)
         {
             var user = _userService.SetUserAsLibrarian(id);
