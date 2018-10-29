@@ -11,6 +11,6 @@ namespace Digibooky_services.Books
         IEnumerable<Book> GetBookByIsbn(string isbn);
         IEnumerable<Book> GetBookByTitle(string title);
         Book ShowDetailsOfBook(int id);
-        IEnumerable<Book> GetBookByAuthor(string title);
+        IEnumerable<Book> GetBookByAuthor(string author);
     }
 }

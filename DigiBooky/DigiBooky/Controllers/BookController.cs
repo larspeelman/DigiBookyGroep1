@@ -35,7 +35,7 @@ namespace Digibooky_api.Controllers
 
         // GET: api/Book/GetOneBook/5
         [HttpGet]
-        public ActionResult<IEnumerable<BookDTO>> GetBookByIsbn([FromQuery (Name = "isbn")] string isbn)
+        public ActionResult<IEnumerable<BookDTO>> GetBookByIsbn([FromQuery] string isbn)
         {
             var result = _bookService.GetBookByIsbn(isbn);
             if (result.Count() == 0)
