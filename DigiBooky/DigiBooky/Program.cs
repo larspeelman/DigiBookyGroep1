@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Digibooky_domain.Authors;
 using Digibooky_domain.Books;
+using Digibooky_domain.Users;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -12,13 +13,25 @@ namespace Digibooky_api
         public static void Main(string[] args)
         {
             InitBooks();
+            InitUsers();
             CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+                
 
+
+        private static void InitUsers()
+        {
+            DBUsers.UsersInLibrary.Add(new User()
+            {
+                IdentificationNumber = "LP_21041987",
+                Email = "xxxx@hotmail.com",
+                RoleOfThisUser = Roles.Role.Administrator
+            });
+        }
         private static void InitBooks()
         {
             Random red = new Random();
@@ -32,7 +45,7 @@ namespace Digibooky_api
 
             for (int bookCount = 1; bookCount < 50; bookCount++)
             {
-                DBBooks.ListofBooks.Add(new Book { BookTitle = $"BookTitle{bookCount}", AuthorId = red.Next(1, 4).ToString(), Isbn = "isbn" + bookCount.ToString() });
+                DBBooks.ListofBooks.Add(new Book { BookTitle = $"BookTitle{bookCount}", AuthorId = red.Next(0, 3).ToString(), Isbn = "isbn" + bookCount.ToString() });
             }
         }
     }

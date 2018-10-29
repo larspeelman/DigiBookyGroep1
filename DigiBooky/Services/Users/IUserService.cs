@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Digibooky_services.Users
 {
@@ -12,6 +13,7 @@ namespace Digibooky_services.Users
         User CreateNewUser(User userToCreate);
         IEnumerable<User> GetAllUsers();
 
-        User SetUserAsLibarian(int id);
+        User SetUserAsLibrarian(int id);
+        Task<User> Authenticate(string identificationNumber);
     }
 }

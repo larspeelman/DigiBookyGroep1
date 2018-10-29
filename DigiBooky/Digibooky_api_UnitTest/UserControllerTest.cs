@@ -101,14 +101,14 @@ namespace DigiBooky_api_UnitTests
             UserDTOWithIdentificationNumber testUser = new UserDTOWithIdentificationNumber();
             User user = GetTestUser();
             user.Id = 1;
-            user.RoleOfThisUser = Roles.Role.Libarian;
+            user.RoleOfThisUser = Roles.Role.Librarian;
             
             mapperUser.FromUserDTOWithIdToUser(testUser).Returns(user);
-            userService.SetUserAsLibarian(1).Returns(user);
+            userService.SetUserAsLibrarian(1).Returns(user);
 
 
             //When
-            var check = userController.RegiserLibarian(1).Result;
+            var check = userController.RegisterLibrarian(1).Result;
 
 
             //then
@@ -125,14 +125,14 @@ namespace DigiBooky_api_UnitTests
             UserDTOWithIdentificationNumber testUser = new UserDTOWithIdentificationNumber();
             User user = GetTestUser();
             user.Id = 1;
-            user.RoleOfThisUser = Roles.Role.Libarian;
+            user.RoleOfThisUser = Roles.Role.Librarian;
 
             mapperUser.FromUserDTOWithIdToUser(testUser).Returns(user);
-            userService.SetUserAsLibarian(1).ReturnsNull();
+            userService.SetUserAsLibrarian(1).ReturnsNull();
 
 
             //When
-            var check = userController.RegiserLibarian(1).Result;
+            var check = userController.RegisterLibrarian(1).Result;
 
 
             //then
