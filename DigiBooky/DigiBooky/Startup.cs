@@ -1,8 +1,11 @@
-﻿using Api.DTO;
-using Api.Helper;
-using Domain.Authors;
-using Domain.Books;
-using Domain.Users;
+﻿
+using Digibooky_api.DTO;
+using Digibooky_api.Helper;
+using Digibooky_domain.Books;
+using Digibooky_domain.Users;
+using Digibooky_services.Books;
+using Digibooky_services.Rentals;
+using Digibooky_services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NJsonSchema;
 using NSwag.AspNetCore;
-using Services.Books;
-using Services.Rentals;
-using Services.Users;
 
-namespace Api
+namespace Digibooky_api
 {
     public class Startup
     {

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.DTO;
-using Api.Helper;
-using Domain.Books;
+using Digibooky_api.DTO;
+using Digibooky_api.Helper;
+using Digibooky_domain.Books;
+using Digibooky_services.Books;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Services.Books;
 
-namespace Api.Controllers
+namespace Digibooky_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

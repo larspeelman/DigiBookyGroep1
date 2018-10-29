@@ -1,8 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Users
+namespace Digibooky_domain.Users
 {
     public static class DBUsers
     {

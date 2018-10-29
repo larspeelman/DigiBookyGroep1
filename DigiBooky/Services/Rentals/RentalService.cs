@@ -1,11 +1,11 @@
-﻿using Domain.Books;
-using Domain.Rentals;
+﻿using Digibooky_domain.Books;
+using Digibooky_domain.Rentals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Services.Rentals
+namespace Digibooky_services.Rentals
 {
     public class RentalService : IRentalService
     {

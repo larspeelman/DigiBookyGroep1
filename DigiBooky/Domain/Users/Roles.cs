@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Users
+namespace Digibooky_domain.Users
 {
     public class Roles
     {

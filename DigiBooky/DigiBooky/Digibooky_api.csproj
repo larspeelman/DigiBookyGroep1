@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\Services\Services.csproj" />
+    <ProjectReference Include="..\Domain\Digibooky_domain.csproj" />
+    <ProjectReference Include="..\Services\Digibooky_services.csproj" />
   </ItemGroup>
 
 </Project>

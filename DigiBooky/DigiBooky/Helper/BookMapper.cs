@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Helper;
-using Domain.Books;
+using Digibooky_api.Helper;
+using Digibooky_domain.Books;
 
-namespace Api.DTO
+namespace Digibooky_api.DTO
 {
     public class BookMapper: IBookMapper
     {

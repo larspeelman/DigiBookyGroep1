@@ -1,7 +1,9 @@
-﻿using Api.DTO;
-using Domain.Users;
+﻿
+using Digibooky_api.DTO;
+using Digibooky_domain.Users;
 
-namespace Api.Helper
+
+namespace Digibooky_api.Helper
 {
     public interface IMapperUser
     {

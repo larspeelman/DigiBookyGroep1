@@ -4,11 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Domain.Users
+namespace Digibooky_domain.Users
 {
     public class User
     {
         public int Id { get; set; }
+        private static int UserCounter = 0;
         public string IdentificationNumber { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
@@ -24,7 +25,8 @@ namespace Domain.Users
 
         public User()
         {
-
+            Id = UserCounter;
+            UserCounter++;
         }
 
         public override bool Equals(object obj)

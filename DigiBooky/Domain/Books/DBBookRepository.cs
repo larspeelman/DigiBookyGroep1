@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Digibooky_domain.Books;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Books
+namespace Digibooky_domain.Books
 {
     public class DBBookRepository :IDBBookRepository
     {
@@ -17,7 +18,7 @@ namespace Domain.Books
             return DBBooks.ListofBooks.Find(book => book.Id == id);
         }
 
-        public IEnumerable<Book> GetBookByIsbn()
+        public IEnumerable<Book> GetBookByIsbn(string isbn)
         {
             throw new NotImplementedException();
         }

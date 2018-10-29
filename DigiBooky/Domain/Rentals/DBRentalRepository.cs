@@ -1,8 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Rentals
+namespace Digibooky_domain.Rentals
 {
     public class DBRentalRepository : IDBRentalRepository
     {

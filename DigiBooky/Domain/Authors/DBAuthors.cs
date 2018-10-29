@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Authors
+namespace Digibooky_domain.Authors
 {
     public static class DBAuthors
     {

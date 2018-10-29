@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Domain.Books;
+using Digibooky_domain.Books;
+using Digibooky_services.Books;
 using NSubstitute;
-using Services.Books;
 using Xunit;
 
-namespace DigiBookyTests.Books
+namespace Digibooky_services_UnitTests
 {
     public class BookServiceTest
     {

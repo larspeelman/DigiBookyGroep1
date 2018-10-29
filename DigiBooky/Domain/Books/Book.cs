@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Domain.Authors;
+using Digibooky_domain.Authors;
 
-namespace Domain.Books
+namespace Digibooky_domain.Books
 {
     public class Book
     {

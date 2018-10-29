@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.DTO;
-using Api.Helper;
-using Domain.Users;
+using Digibooky_api.DTO;
+using Digibooky_api.Helper;
+using Digibooky_services.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Services.Users;
 
-namespace Api.Controllers
+namespace Digibooky_api.Controllers
 {
     //[Authorize]
     [Route("api/[controller]")]

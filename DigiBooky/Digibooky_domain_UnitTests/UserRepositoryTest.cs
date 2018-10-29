@@ -1,11 +1,11 @@
-﻿using Domain.Authors;
-using Domain.Users;
+﻿using Digibooky_domain.Authors;
+using Digibooky_domain.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace DigiBookyTests.Users
+namespace Digibooky_domain_UnitTests
 {
     public class UserRepositoryTest
     {
@@ -13,7 +13,7 @@ namespace DigiBookyTests.Users
         public void GivenDBUsers_WhenRegisterNewUniqueUser_ThenUserInDB()
         {
             //Given
-            UserRepository dbUsers = new Domain.Users.UserRepository();
+            UserRepository dbUsers = new UserRepository();
             User testUser = new User();
             testUser.IdentificationNumber = "LP_21041987";
             testUser.Email = "xxx@hotmail.com";
@@ -50,6 +50,8 @@ namespace DigiBookyTests.Users
         public void GivenDBUsers_WhenRegisterUserWithNoUniqueIdentificationNumber_ThenUserNotInDB()
         {
             //Given
+            DBUsers.UsersInLibrary.Clear();
+
             UserRepository dbUsers = new UserRepository();
             User testUser = new User();
             testUser.IdentificationNumber = "LP_21041987";
@@ -68,24 +70,24 @@ namespace DigiBookyTests.Users
         }
 
         [Fact]
-        public void GivenUserService_WhenRegisterLiberianOfExistingUserAndAdministrator_ThenReturnUserAsLibarian()
+        public void GivenUserRepository_WhenRegisterLibrarianOfExistingUserAndAdministrator_ThenReturnUserAsLibarian()
         {
             //Given
             UserRepository userRepository = new UserRepository();
-            User testUser = GetTestUser();
-            userRepository.Save(testUser);
+            DBUsers.UsersInLibrary.Clear();
+            User testUser3 = GetTestUser(new DateTime (1987, 5,21), "LP_21051987");
+            userRepository.Save(testUser3);
             DBAuthors.AuthorDB = FakedataAuthor();
             //then
-            Assert.True(userRepository.SetUserAsLibarian(1).RoleOfThisUser == Roles.Role.Libarian);
+            Assert.True(userRepository.SetUserAsLibrarian(testUser3.Id).RoleOfThisUser == Roles.Role.Libarian);
         }
 
-        private User GetTestUser()
+        private User GetTestUser(DateTime day, string id)
         {
             User user = new User();
-            user.IdentificationNumber = "LP_21041987";
+            user.IdentificationNumber = id;
             user.Email = "xxx@hotmail.com";
-            user.Birthdate = new DateTime(1987, 4, 21);
-            user.Id = 1;
+            user.Birthdate = day;
             return user;
         }
 

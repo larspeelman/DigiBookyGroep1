@@ -1,11 +1,12 @@
-﻿using Api.DTO;
-using Domain.Rentals;
+﻿
+using Digibooky_api.DTO;
+using Digibooky_domain.Rentals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api.Helper
+namespace Digibooky_api.Helper
 {
     public class RentalMapper : IRentalMapper
     {

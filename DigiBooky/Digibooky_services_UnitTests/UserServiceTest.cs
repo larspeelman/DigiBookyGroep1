@@ -1,15 +1,15 @@
-﻿using Domain.Users;
+﻿
 using NSubstitute;
-using Services.Users;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using NSubstitute.ReturnsExtensions;
 using Xunit;
+using Digibooky_domain.Users;
+using Digibooky_services.Users;
 
-
-namespace DigiBookyTests.Users
+namespace Digibooky_services_UnitTests
 {
    public class UserServiceTest
     {
@@ -105,7 +105,7 @@ namespace DigiBookyTests.Users
             User testUser = GetTestUser();
             testUser.RoleOfThisUser = Roles.Role.Libarian;
             UserService userService = new UserService(repositoryUserStub);
-            repositoryUserStub.SetUserAsLibarian(1).Returns(testUser);
+            repositoryUserStub.SetUserAsLibrarian(1).Returns(testUser);
 
             //then
             Assert.True(userService.SetUserAsLibarian(1).RoleOfThisUser==Roles.Role.Libarian);
@@ -119,7 +119,7 @@ namespace DigiBookyTests.Users
             User testUser = GetTestUser();
             testUser.RoleOfThisUser = Roles.Role.Libarian;
             UserService userService = new UserService(repositoryUserStub);
-            repositoryUserStub.SetUserAsLibarian(1).ReturnsNull();
+            repositoryUserStub.SetUserAsLibrarian(1).ReturnsNull();
 
             //then
             Assert.Null(userService.SetUserAsLibarian(1));

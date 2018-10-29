@@ -9,13 +9,13 @@ using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using Xunit;
 using System.Text;
-using Domain.Books;
-using Domain.Authors;
-using Api.DTO;
 using System.Linq;
-using Api;
+using Digibooky_domain.Books;
+using Digibooky_domain.Authors;
+using Digibooky_api.DTO;
+using Digibooky_api;
 
-namespace DigiBookyTests.Books
+namespace Digibooky_IntigrationTest.Books
 {
     public class BookIntegrationTest
     {
@@ -85,7 +85,7 @@ namespace DigiBookyTests.Books
                 new Book
                 {
                     BookTitle = "test",
-                    AuthorId = "1",
+                    AuthorId = DBAuthors.AuthorDB[0].Id.ToString(),
                     Isbn = "53151531"
                 }
             };

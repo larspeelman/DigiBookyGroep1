@@ -1,17 +1,17 @@
-﻿using Services.Users;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Xunit;
-using NSubstitute;
-using Api.Controllers;
-using Api.Helper;
-using Api.DTO;
-using Domain.Users;
+using Digibooky_api.Controllers;
+using Digibooky_api.DTO;
+using Digibooky_api.Helper;
+using Digibooky_domain.Users;
+using Digibooky_services.Users;
 using Microsoft.AspNetCore.Mvc;
+using NSubstitute;
 using NSubstitute.ReturnsExtensions;
+using Xunit;
 
-namespace DigiBookyTests.Users
+namespace DigiBooky_api_UnitTests
 {
    public class UserControllerTest
     {

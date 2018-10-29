@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DigiBooky\Api.csproj" />
-    <ProjectReference Include="..\Services\Services.csproj" />
+    <ProjectReference Include="..\DigiBooky\Digibooky_api.csproj" />
+    <ProjectReference Include="..\Services\Digibooky_services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

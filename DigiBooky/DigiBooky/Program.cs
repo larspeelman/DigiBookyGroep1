@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Domain.Authors;
-using Domain.Books;
+using Digibooky_domain.Authors;
+using Digibooky_domain.Books;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Api
+namespace Digibooky_api
 {
     public class Program
     {

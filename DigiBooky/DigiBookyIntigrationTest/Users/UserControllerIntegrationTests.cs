@@ -2,15 +2,14 @@ using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Api;
-using Api.DTO;
-using Domain.Users;
+using Digibooky_api;
+using Digibooky_api.DTO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace DigiBookyIntigrationTest.Users
+namespace Digibooky_IntigrationTest.Users
 {
     public class UserControllerIntegrationTests
     {

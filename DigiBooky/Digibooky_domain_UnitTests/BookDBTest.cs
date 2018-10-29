@@ -1,12 +1,12 @@
-﻿using Domain.Authors;
-using Domain.Books;
+﻿using Digibooky_domain.Authors;
+using Digibooky_domain.Books;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace DigiBookyTests.Books
+namespace Digibooky_domain_UnitTests
 {
     public class DBBookRepositoryTests
     {

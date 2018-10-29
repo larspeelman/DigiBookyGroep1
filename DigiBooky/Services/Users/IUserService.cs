@@ -1,9 +1,9 @@
-﻿using Domain.Users;
+﻿using Digibooky_domain.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Services.Users
+namespace Digibooky_services.Users
 {
     public interface IUserService
     {

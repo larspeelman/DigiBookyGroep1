@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
-using Domain.Users;
+using Digibooky_domain.Users;
 
-namespace Services.Users
+namespace Digibooky_services.Users
 {
     public class UserService : IUserService
     {
@@ -60,7 +60,7 @@ namespace Services.Users
 
         public User SetUserAsLibarian(int id)
         {
-            return _userRepository.SetUserAsLibarian(id);
+            return _userRepository.SetUserAsLibrarian(id);
         }
     }
 }

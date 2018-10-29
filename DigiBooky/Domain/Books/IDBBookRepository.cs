@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Books
+namespace Digibooky_domain.Books
 {
     public interface IDBBookRepository
     {

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Api.DTO;
-using Domain.Authors;
-using Domain.Books;
+using Digibooky_api.DTO;
+using Digibooky_domain.Authors;
+using Digibooky_domain.Books;
+using NSubstitute;
 using Xunit;
 
-namespace DigiBookyTests.Books
+namespace DigiBooky_api_UnitTests
 {
     public class BookMapperTest
     {

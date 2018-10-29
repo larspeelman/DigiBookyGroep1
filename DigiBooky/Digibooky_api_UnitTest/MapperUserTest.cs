@@ -1,12 +1,13 @@
-﻿using Api.DTO;
-using Api.Helper;
-using Domain.Users;
+﻿
+using Digibooky_api.DTO;
+using Digibooky_api.Helper;
+using Digibooky_domain.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace DigiBookyTests.Users
+namespace DigiBooky_api_UnitTests
 {
    public class MapperUserTest
     {

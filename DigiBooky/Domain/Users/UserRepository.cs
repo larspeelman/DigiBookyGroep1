@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Domain.Users
+namespace Digibooky_domain.Users
 {
     public class UserRepository : IUserRepository
     {
@@ -20,7 +20,7 @@ namespace Domain.Users
             return DBUsers.UsersInLibrary;
         }
 
-        public User SetUserAsLibarian(int id)
+        public User SetUserAsLibrarian(int id)
         {
             var userInDb = DBUsers.UsersInLibrary.SingleOrDefault(user => user.Id.ToString() == id.ToString());
             if (userInDb != null)

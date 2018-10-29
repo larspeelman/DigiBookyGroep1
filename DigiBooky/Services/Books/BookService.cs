@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Domain.Books;
+using Digibooky_domain.Books;
 
-namespace Services.Books
+namespace Digibooky_services.Books
 {
     public class BookService: IBookService
     {

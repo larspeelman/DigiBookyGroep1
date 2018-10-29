@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api.DTO
+namespace Digibooky_api.DTO
 {
     public class RentalDTO
     {

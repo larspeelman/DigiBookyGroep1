@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain.Users;
+using Digibooky_domain.Users;
 
-namespace Api.DTO
+namespace Digibooky_api.DTO
 {
     public class UserDTOWithoutIdentificationNumber
     {

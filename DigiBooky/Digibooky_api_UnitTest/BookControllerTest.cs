@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Api.Controllers;
-using Api.DTO;
-using Api.Helper;
+using Digibooky_api.Controllers;
+using Digibooky_api.DTO;
+using Digibooky_api.Helper;
+using Digibooky_services.Books;
 using NSubstitute;
-using Services.Books;
 using Xunit;
 
-namespace DigiBookyTests.Books
+namespace DigiBooky_api_UnitTests
 {
     public class BookControllerTest
     {

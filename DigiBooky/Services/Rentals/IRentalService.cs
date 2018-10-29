@@ -1,9 +1,9 @@
-﻿using Domain.Rentals;
+﻿using Digibooky_domain.Rentals;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Services.Rentals
+namespace Digibooky_services.Rentals
 {
     public interface IRentalService
     {
