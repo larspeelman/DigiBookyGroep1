@@ -10,13 +10,13 @@ namespace Digibooky_domain.Rentals
     public class Rental
     {
 
-        public Book Book => ReturnBookForRental(); 
         public string UserId { get; set; }
         public DateTime EndDate { get; set; }
-        public User User =>ReturnUserForThisRental();
         public string RentalId {get; set;}
         private static int rentalCounter;
         public string Isbn { get; set; }
+        public Book Book => ReturnBookForRental(); 
+        public User User =>ReturnUserForThisRental();
 
         public Rental()
         {

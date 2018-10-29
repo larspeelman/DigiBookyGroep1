@@ -19,10 +19,15 @@ namespace Digibooky_services.Rentals
 
         }
 
+        public List<Rental> GetAllRentals()
+        {
+            return DBRentals.DBRental;
+        }
+
         public Rental RentABook(Rental rental)
         {
             var book = _bookRepository.GetBookByIsbn(rental.Isbn).SingleOrDefault(bookToFind => bookToFind.Isbn == rental.Isbn);
-            if (book.BookIsRentable == true && book != null)
+            if (book != null && book.BookIsRentable == true)
             {
                 rental.EndDate = SetDueDate();
                 book.BookIsRentable = false;

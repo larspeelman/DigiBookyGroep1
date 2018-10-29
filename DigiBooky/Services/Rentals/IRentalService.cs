@@ -8,5 +8,6 @@ namespace Digibooky_services.Rentals
     public interface IRentalService
     {
         Rental RentABook(Rental rental);
+        List<Rental> GetAllRentals();
     }
 }

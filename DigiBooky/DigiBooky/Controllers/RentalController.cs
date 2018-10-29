@@ -26,9 +26,11 @@ namespace Digibooky_api.Controllers
 
         // GET: api/Rental
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<RentalDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<RentalDTO> listOfAllRentalsDTOs = new List<RentalDTO>();
+           listOfAllRentalsDTOs = _rentalService.GetAllRentals().Select(rental => { return _rentalMapper.FromRentalToRentalDTO(rental); }).ToList();
+            return listOfAllRentalsDTOs;
         }
 
         // GET: api/Rental/5
