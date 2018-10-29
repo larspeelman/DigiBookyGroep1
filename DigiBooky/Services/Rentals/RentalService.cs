@@ -9,26 +9,28 @@ namespace Digibooky_services.Rentals
 {
     public class RentalService : IRentalService
     {
-        private readonly IDBBookRepository _bookRepository;
-        private readonly IDBRentalRepository _rentalRepository;
+        private readonly IBookRepository _bookRepository;
+        private readonly IRentalRepository _rentalRepository;
 
-        public RentalService(IDBBookRepository bookRepository)
+        public RentalService(IBookRepository bookRepository, IRentalRepository rentalRepository)
         {
             _bookRepository = bookRepository;
+            _rentalRepository = rentalRepository;
+
         }
 
         public Rental RentABook(Rental rental)
         {
             var book = _bookRepository.GetBookByIsbn(rental.Isbn).SingleOrDefault(bookToFind => bookToFind.Isbn == rental.Isbn);
-            if (book.BookIsRentable == true)
+            if (book.BookIsRentable == true && book != null)
             {
                 rental.EndDate = SetDueDate();
                 book.BookIsRentable = false;
                 _rentalRepository.AddRentalToDB(rental);
-                
-               
+                return rental;
+
             }
-            return rental;
+            return null;
         }
 
         private DateTime SetDueDate()

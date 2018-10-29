@@ -33,9 +33,10 @@ namespace Digibooky_api
             services.AddSingleton<IRentalService, RentalService>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IUserService, UserService>()
-                    .AddSingleton<IDBBookRepository, DBBookRepository>()
+                    .AddSingleton<IBookRepository, BookRepository>()
                     .AddSingleton<IBookMapper, BookMapper>()
-                    .AddSingleton<IMapperUser, MapperUser>();
+                    .AddSingleton<IMapperUser, MapperUser>()
+                    .AddSingleton<IRentalService, RentalService>();
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("ModeratorAccess",

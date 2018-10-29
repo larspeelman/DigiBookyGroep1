@@ -8,9 +8,9 @@ namespace Digibooky_services.Books
 {
     public class BookService: IBookService
     {
-        private readonly IDBBookRepository _IDBBookRepository;
+        private readonly IBookRepository _IDBBookRepository;
 
-        public BookService(IDBBookRepository dbBook)
+        public BookService(IBookRepository dbBook)
         {
             _IDBBookRepository = dbBook;
         }

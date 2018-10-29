@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Digibooky_domain.Books
 {
-    public class DBBookRepository :IDBBookRepository
+    public class BookRepository :IBookRepository
     {
 
         public IEnumerable<Book> GetAllBooks()

@@ -32,7 +32,7 @@ namespace Digibooky_api
 
             for (int bookCount = 1; bookCount < 50; bookCount++)
             {
-                DBBooks.ListofBooks.Add(new Book { BookTitle = $"BookTitle{bookCount}", AuthorId = red.Next(1, 4).ToString(), Isbn = "isbn" + bookCount.ToString() });
+                DBBooks.ListofBooks.Add(new Book { BookTitle = $"BookTitle{bookCount}", AuthorId = red.Next(0, 3).ToString(), Isbn = "isbn" + bookCount.ToString() });
             }
         }
     }
