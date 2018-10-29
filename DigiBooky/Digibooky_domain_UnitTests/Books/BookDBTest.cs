@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace Digibooky_domain_UnitTests
+namespace Digibooky_domain_UnitTests.Books
 {
     public class DBBookRepositoryTests
     {
@@ -14,22 +14,24 @@ namespace Digibooky_domain_UnitTests
         public void GivenBookDB_WhenGetAllBooks_ThenReturnFullDatabase()
         {
             BookRepository dBBooks = new BookRepository();
-            DBBooks.ListofBooks.Clear();
-            DBAuthors.AuthorDB.Clear();
             Book.CounterOfBooks = 0;
             Author.IdCounter = 0;
-
-            Author[] authorList = new Author[]
-            {
-                new Author("Jef", "Depaepe"),
-                new Author("Jos", "Schuurlink"),
-                new Author("Guido", "Gazelle")
-            };
-            DBAuthors.AuthorDB = authorList.ToList();
-
-            DBBooks.ListofBooks.Add(new Book() { BookTitle = "test", Isbn = "isbnTest", AuthorId = "0"});   
+            ClearAllDataBases();
             
-            Assert.NotEmpty(DBBooks.ListofBooks.Where(book => book.Isbn == "isbnTest"));
+            //DBAuthors.AuthorDB.Add(new Author("test", "test") { Id = "0" });
+
+            //DBBooks.ListofBooks.Add(new Book() { BookTitle = "test", Isbn = "isbnTest", AuthorId = "0"});   
+            
+            Assert.Empty(dBBooks.GetAllBooks());
+            ClearAllDataBases();
+        }
+
+        private void ClearAllDataBases()
+        {
+            DBBooks.ListofBooks = null;
+            DBBooks.ListofBooks = new List<Book>();
+            DBAuthors.AuthorDB = null;
+            DBAuthors.AuthorDB = new List<Author>();
         }
 
         //[Fact]

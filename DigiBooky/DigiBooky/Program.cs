@@ -20,7 +20,7 @@ namespace Digibooky_api
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
-                
+
 
 
         private static void InitUsers()
@@ -42,6 +42,7 @@ namespace Digibooky_api
                 new Author("Jos", "Schuurlink"),
                 new Author("Guido", "Gazelle"),
             };
+
             DBAuthors.AuthorDB = authorList;
 
             for (int bookCount = 1; bookCount < 50; bookCount++)

@@ -28,9 +28,9 @@ namespace Digibooky_api_UnitTests
             rentalServiceStub = Substitute.For<IRentalService>();
             rentalController = new RentalController(rentalServiceStub, rentalMapperStub);
 
-            DBAuthors.AuthorDB.Clear();
+            DBAuthors.AuthorDB = new List<Author>();
             DBAuthors.AuthorDB.Add(new Author("testFirstName", "testLastName"));
-            DBBooks.ListofBooks.Clear();
+            DBBooks.ListofBooks = new List<Book>();
             DBBooks.ListofBooks.Add(new Book()
             {
                 AuthorId = "0",
@@ -38,7 +38,7 @@ namespace Digibooky_api_UnitTests
                 Isbn = "isbnTest",
                 BookIsRentable = true
             });
-            DBUsers.UsersInLibrary.Clear();
+            DBUsers.UsersInLibrary = new List<User>();
             DBUsers.UsersInLibrary.Add(new User() { FirstName = "testUser", Birthdate = new DateTime(1987, 5, 21), IdentificationNumber = "LP_21051987", Email = "xx@hotmail.com" });
         }
         [Fact]

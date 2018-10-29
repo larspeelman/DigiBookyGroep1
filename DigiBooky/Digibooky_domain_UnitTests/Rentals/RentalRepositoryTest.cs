@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Digibooky_domain_UnitTests
+namespace Digibooky_domain_UnitTests.Rentals
 {
    public class RentalRepositoryTest
     {
@@ -18,23 +18,14 @@ namespace Digibooky_domain_UnitTests
         private void InitializeRepository()
         {
             _rentalRepository = new RentalRepository();
-            DBBooks.ListofBooks.Clear();
-            DBAuthors.AuthorDB.Clear();
-            DBRentals.DBRental.Clear();
-            DBUsers.UsersInLibrary.Clear();
-
-            RentalDTO.rentalCounter = 0;
-            Book.CounterOfBooks = 0;
-            Author.IdCounter = 0;
-
-            DBAuthors.AuthorDB.Add(new Author("testFirstName", "testLastName"));
+            DBAuthors.AuthorDB.Add(new Author("testFirstName", "testLastName") { Id = "0"});
             DBBooks.ListofBooks.Add(new Book()
             {
                 AuthorId = "0",
                 BookTitle = "test",
-                Isbn = "isbnTest",
+                Isbn = "isbnTestRentalRepository",
             });
-            DBUsers.UsersInLibrary.Add(new User() { FirstName = "testUser", Birthdate = new DateTime(1987, 5, 21), IdentificationNumber = "LP_21051987", Email = "xx@hotmail.com" });
+            DBUsers.UsersInLibrary.Add(new User() { FirstName = "testUser", Birthdate = new DateTime(1987, 5, 21), IdentificationNumber = "LP_21051987", Email = "xx@hotmail.com", Id=0 });
         }
 
         [Fact]
@@ -42,21 +33,23 @@ namespace Digibooky_domain_UnitTests
         {
             InitializeRepository();
             //Given
-            Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTest", };
+            Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTestRentalRepository", };
 
             //When
             _rentalRepository.AddRentalToDB(testRental);
 
             //Then
             Assert.Contains(testRental, DBRentals.DBRental);
+            ClearAllDataBasesRentalRepositoryTest();
         }
 
         [Fact]
         public void GivenRentalRepository_WhenReturnRentalBook_ThenBookIsBackRentable()
         {
+            ClearAllDataBasesRentalRepositoryTest();
             InitializeRepository();
             //Given
-            Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTest", RentalId = "0" };
+            Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTestRentalRepository", RentalId = "0" };
             _rentalRepository.AddRentalToDB(testRental);
             testRental.Book.BookIsRentable = false;
 
@@ -65,6 +58,7 @@ namespace Digibooky_domain_UnitTests
 
             //Then
             Assert.True(testRental.Book.BookIsRentable);
+            ClearAllDataBasesRentalRepositoryTest();
         }
 
         [Fact]
@@ -72,7 +66,7 @@ namespace Digibooky_domain_UnitTests
         {
             InitializeRepository();
             //Given
-            Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTest" };
+            Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTestRentalRepository" };
             _rentalRepository.AddRentalToDB(testRental);
             testRental.Book.BookIsRentable = true;
 
@@ -81,6 +75,19 @@ namespace Digibooky_domain_UnitTests
 
             //Then
             Assert.Null(expexted);
+            ClearAllDataBasesRentalRepositoryTest();
+        }
+
+        private void ClearAllDataBasesRentalRepositoryTest()
+        {
+            DBRentals.DBRental = null;
+            DBRentals.DBRental = new List<Rental>();
+            DBUsers.UsersInLibrary = null;
+            DBUsers.UsersInLibrary = new List<User>();
+            DBBooks.ListofBooks = null;
+            DBBooks.ListofBooks = new List<Book>();
+            DBAuthors.AuthorDB = null;
+            DBAuthors.AuthorDB = new List<Author>();
         }
     }
 }
