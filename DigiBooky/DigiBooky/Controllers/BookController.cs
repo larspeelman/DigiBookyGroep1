@@ -28,44 +28,77 @@ namespace Digibooky_api.Controllers
         // GET: api/Book/GetAllBooks
         [HttpGet]
         //[Route("GetAllBooks")]
-        public IEnumerable<BookDTO> GetAllBooks()
+        public ActionResult<IEnumerable<BookDTO>> GetAllBooks(string isbn = null, string title = null, string author= null)
         {
-            return _bookService.GetAllBooks().Select(_bookMapper.BooksMapper);
+            IEnumerable<Book> result;
+            if (!string.IsNullOrEmpty(isbn))
+            {
+                result = _bookService.GetBookByIsbn(isbn);
+                if (!result.Any())
+                {
+                    return BadRequest($"No books found for Isbn {isbn}");
+                }
+                return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+            }
+            if (!string.IsNullOrEmpty(title))
+            {
+                result = _bookService.GetBookByTitle(title);
+                if (!result.Any())
+                {
+                    return BadRequest($"No books found for title {title}");
+                }
+                return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+            }
+            if (!string.IsNullOrEmpty(author))
+            {
+                result = _bookService.GetBookByAuthor(author);
+                if (!result.Any())
+                {
+                    return BadRequest($"No books found for author {author}");
+                }
+                return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+            }
+            return Ok(_bookService.GetAllBooks().Select(_bookMapper.BooksMapper));
         }
 
         // GET: api/Book/GetOneBook/5
-        [HttpGet]
-        public ActionResult<IEnumerable<BookDTO>> GetBookByIsbn([FromQuery (Name = "isbn")] string isbn)
-        {
-            var result = _bookService.GetBookByIsbn(isbn);
-            if (result.Count() == 0)
-            {
-                return BadRequest($"No books found for title {isbn}");
-            }
-            return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
-        }
+        #region test
+        
+        //[HttpGet]
+        //[Route("[action]")]
+        //public ActionResult<IEnumerable<BookDTO>> GetBookByIsbn([FromQuery (Name= "isbn")] string isbn)
+        //{
+        //    var result = _bookService.GetBookByIsbn(isbn);
+        //    if (!result.Any())
+        //    {
+        //        return BadRequest($"No books found for title {isbn}");
+        //    }
+        //    return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+        //}
 
-        [HttpGet]
-        public ActionResult<IEnumerable<BookDTO>> GetBookTitle([FromQuery (Name = "title")] string title)
-        {
-            var result = _bookService.GetBookByTitle(title);
-            if (result.Count() == 0)
-            {
-                return BadRequest($"No books found for title {title}");
-            }
-            return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
-        }
+        //[HttpGet]
+        //public ActionResult<IEnumerable<BookDTO>> GetBookTitle([FromQuery (Name = "title")] string title)
+        //{
+        //    var result = _bookService.GetBookByTitle(title);
+        //    if (!result.Any())
+        //    {
+        //        return BadRequest($"No books found for title {title}");
+        //    }
+        //    return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+        //}
 
-        [HttpGet]
-        public ActionResult<IEnumerable<BookDTO>> GetBookByAuthor([FromQuery(Name ="author")]string author)
-        {
-            var result = _bookService.GetBookByAuthor(author);
-            if (result.Count() == 0)
-            {
-                return BadRequest($"No books found for author {author}");
-            }
-            return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
-        }
+        //[HttpGet]
+        //public ActionResult<IEnumerable<BookDTO>> GetBookByAuthor([FromQuery(Name ="author")]string author)
+        //{
+        //    var result = _bookService.GetBookByAuthor(author);
+        //    if (!result.Any())
+        //    {
+        //        return BadRequest($"No books found for author {author}");
+        //    }
+        //    return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+        //}
+        #endregion
+
 
         [HttpGet("{id}")]
         public ActionResult<BookDTO> ShowDetailsOfBook(int id)
