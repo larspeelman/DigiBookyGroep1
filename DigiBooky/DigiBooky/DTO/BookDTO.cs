@@ -11,6 +11,7 @@ namespace Digibooky_api.DTO
         public string Isbn { get; set; }
         public string AuthorName { get; set; }
         public int BookId { get; set; }
+        public bool BookIsRentable { get; set; }
 
         public override bool Equals(object obj)
         {

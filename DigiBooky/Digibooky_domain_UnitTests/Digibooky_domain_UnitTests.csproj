@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DigiBooky\Digibooky_api.csproj" />
     <ProjectReference Include="..\Domain\Digibooky_domain.csproj" />
   </ItemGroup>
 

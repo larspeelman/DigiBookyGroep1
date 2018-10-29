@@ -15,20 +15,46 @@ namespace Digibooky_domain_UnitTests
         {
             BookRepository dBBooks = new BookRepository();
             DBBooks.ListofBooks.Clear();
-            Random red = new Random();
+            DBAuthors.AuthorDB.Clear();
+            Book.CounterOfBooks = 0;
+            Author.IdCounter = 0;
+
             Author[] authorList = new Author[]
             {
                 new Author("Jef", "Depaepe"),
                 new Author("Jos", "Schuurlink"),
                 new Author("Guido", "Gazelle")
             };
-            for (int bookCount = 1; bookCount < 50; bookCount++)
-            {
-                DBBooks.ListofBooks.Add(new Book { BookTitle = $"BookTitle{bookCount}", AuthorId = red.Next(0, 3).ToString(), Isbn = "isbn" + bookCount.ToString() });
-            }
+            DBAuthors.AuthorDB = authorList.ToList();
+
+            DBBooks.ListofBooks.Add(new Book() { BookTitle = "test", Isbn = "isbnTest", AuthorId = "0"});   
             
-            Assert.Equal(49, dBBooks.GetAllBooks().Count());
+            Assert.NotEmpty(DBBooks.ListofBooks.Where(book => book.Isbn == "isbnTest"));
         }
+
+        //[Fact]
+        //public void test()
+        //{
+        //    BookRepository dBBooks = new BookRepository();
+
+        //    DBBooks.ListofBooks = new List<Book> { new Book { BookTitle = "test", Isbn = "isbnTest", AuthorId = "0" } };
+
+        //    DBBooks.ListofBooks.Clear();
+        //    DBAuthors.AuthorDB.Clear();
+        //    Book.CounterOfBooks = 0;
+        //    Author.IdCounter = 0;
+
+        //    Author[] authorList = new Author[]
+        //    {
+        //        new Author("Jef", "Depaepe"),
+        //        new Author("Jos", "Schuurlink"),
+        //        new Author("Guido", "Gazelle")
+        //    };
+
+        //    DBAuthors.AuthorDB = authorList.ToList();
+        //    DBBooks.ListofBooks.Add(new Book() { BookTitle = "test", Isbn = "isbnTest", AuthorId = "0" });
+        //    Assert.NotEmpty(DBBooks.ListofBooks.Where(book => book.Isbn == "isbnTest"));
+        //}
 
     }
 }

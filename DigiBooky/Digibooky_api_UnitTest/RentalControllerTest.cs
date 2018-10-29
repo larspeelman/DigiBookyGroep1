@@ -22,10 +22,10 @@ namespace Digibooky_api_UnitTests
 
         private void Initialize_RentalIntegrationTest()
         {
-            IRentalRepository rentalRepository = Substitute.For<IRentalRepository>();
-            IBookRepository bookRepository = Substitute.For<IBookRepository>();
+            IRentalRepository rentalRepositoryStub = Substitute.For<IRentalRepository>();
+            IBookRepository bookRepositoryStub = Substitute.For<IBookRepository>();
             rentalMapperStub = Substitute.For<IRentalMapper>();
-            rentalServiceStub = Substitute.For<IRentalService>(bookRepository, rentalRepository);
+            rentalServiceStub = Substitute.For<IRentalService>();
             rentalController = new RentalController(rentalServiceStub, rentalMapperStub);
 
             DBAuthors.AuthorDB.Clear();
@@ -41,9 +41,10 @@ namespace Digibooky_api_UnitTests
             DBUsers.UsersInLibrary.Clear();
             DBUsers.UsersInLibrary.Add(new User() { FirstName = "testUser", Birthdate = new DateTime(1987, 5, 21), IdentificationNumber = "LP_21051987", Email = "xx@hotmail.com" });
         }
-
+        [Fact]
         public void GivenRentalController_WhenRentAExistingBook_ThenReturnRentalDto()
         {
+            Initialize_RentalIntegrationTest();
             //Given
             RentalDTO testRentalDTO = new RentalDTO() { UserIdNumber = "LP_21051987", Isbn = "isbnTest" };
             Rental testRental = new Rental();
@@ -55,6 +56,23 @@ namespace Digibooky_api_UnitTests
 
             //
             rentalServiceStub.Received().RentABook(testRental);
+        }
+
+        [Fact]
+        public void GivenRentalController_WhenReturnAExistingRental_ThenReturnRentalDto()
+        {
+            Initialize_RentalIntegrationTest();
+            //Given
+            RentalDTO testRentalDTO = new RentalDTO() { UserIdNumber = "LP_21051987", Isbn = "isbnTest" };
+            Rental testRental = new Rental();
+            rentalMapperStub.FromRentalDTOToRental(testRentalDTO).Returns(testRental);
+            rentalServiceStub.ReturnRentalBook(testRental, 0).Returns(testRental);
+
+            //When
+            rentalController.ReturnABook(testRentalDTO, 0);
+
+            //
+            rentalServiceStub.Received().ReturnRentalBook(testRental, 0);
         }
     }
 }
