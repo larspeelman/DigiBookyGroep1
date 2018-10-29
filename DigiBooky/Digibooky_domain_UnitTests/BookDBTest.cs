@@ -13,7 +13,7 @@ namespace Digibooky_domain_UnitTests
         [Fact]
         public void GivenBookDB_WhenGetAllBooks_ThenReturnFullDatabase()
         {
-            DBBookRepository dBBooks = new DBBookRepository();
+            BookRepository dBBooks = new BookRepository();
             Random red = new Random();
             Author[] authorList = new Author[]
             {

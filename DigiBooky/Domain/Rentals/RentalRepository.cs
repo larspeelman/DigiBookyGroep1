@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Digibooky_domain.Rentals
 {
-    public class DBRentalRepository : IDBRentalRepository
+    public class RentalRepository : IRentalRepository
     {
         public void AddRentalToDB(Rental bookToRent)
         {

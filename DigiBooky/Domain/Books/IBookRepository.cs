@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Digibooky_domain.Books
 {
-    public interface IDBBookRepository
+    public interface IBookRepository
     {
         IEnumerable<Book> GetAllBooks();
         Book GetBookById(int id);
