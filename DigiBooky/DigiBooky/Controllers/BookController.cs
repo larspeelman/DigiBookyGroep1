@@ -28,30 +28,39 @@ namespace Digibooky_api.Controllers
         // GET: api/Book/GetAllBooks
         [HttpGet]
         //[Route("GetAllBooks")]
-        public IEnumerable<BookDTO> GetAllBooks()
+        public ActionResult<IEnumerable<BookDTO>> GetAllBooks(string isbn = null, string title = null, string author = null)
         {
-            return _bookService.GetAllBooks().Select(_bookMapper.BooksMapper);
-        }
-
-        // GET: api/Book/GetOneBook/5
-        [HttpGet("{isbn}", Name = "GetBookByIsdn")]
-        //[Route("GetBookByIsdn")]
-        public ActionResult<BookDTO> Get(string isbn)
-        {
-                Book foundBook = _bookService.GetBookByIsdn(isbn);
-                if (foundBook == null)
+            IEnumerable<Book> result;
+            if (!string.IsNullOrEmpty(isbn))
+            {
+                result = _bookService.GetBookByIsbn(isbn);
+                if (!result.Any())
                 {
-                    return BadRequest($"Book with id: {isbn} not found");
+                    return BadRequest($"No books found for Isbn {isbn}");
                 }
-                return Ok(_bookMapper.BooksMapper(foundBook));
+                return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+            }
+            if (!string.IsNullOrEmpty(title))
+            {
+                result = _bookService.GetBookByTitle(title);
+                if (!result.Any())
+                {
+                    return BadRequest($"No books found for title {title}");
+                }
+                return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+            }
+            if (!string.IsNullOrEmpty(author))
+            {
+                result = _bookService.GetBookByAuthor(author);
+                if (!result.Any())
+                {
+                    return BadRequest($"No books found for author {author}");
+                }
+                return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+            }
+            return Ok(_bookService.GetAllBooks().Select(_bookMapper.BooksMapper));
         }
 
-        [HttpGet("{title}", Name = "GetBookTitle")]
-        [Route("GetBookTitle")]
-        public ActionResult<IEnumerable<BookDTO>> GetBookTitle(string title)
-        {
-            return BadRequest($"Book with Title: {title} not found");
-        }
 
         [HttpGet("{id}")]
         public ActionResult<BookDTO> ShowDetailsOfBook(int id)

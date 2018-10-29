@@ -22,7 +22,42 @@ namespace DigiBooky_api_UnitTests
 
             bookSut.GetAllBooks();
             bookService.Received().GetAllBooks();
+        }
 
+        [Fact]
+        public void GivenBookController_WhenAskListofBooksWithIsbN_ThenShouldEnterMethodInService()
+        {
+            IBookService bookService = Substitute.For<IBookService>();
+            IBookMapper bookMapper = Substitute.For<IBookMapper>();
+
+            BookController bookSut = new BookController(bookService, bookMapper);
+
+            bookSut.GetAllBooks(isbn:"5");
+            bookService.Received().GetBookByIsbn("5");
+        }
+
+        [Fact]
+        public void GivenBookController_WhenAskListofBooksWithAuthor_ThenShouldEnterMethodInService()
+        {
+            IBookService bookService = Substitute.For<IBookService>();
+            IBookMapper bookMapper = Substitute.For<IBookMapper>();
+
+            BookController bookSut = new BookController(bookService, bookMapper);
+
+            bookSut.GetAllBooks(author: "author");
+            bookService.Received().GetBookByAuthor("author");
+        }
+
+        [Fact]
+        public void GivenBookController_WhenAskListofBooksWithTitle_ThenShouldEnterMethodInService()
+        {
+            IBookService bookService = Substitute.For<IBookService>();
+            IBookMapper bookMapper = Substitute.For<IBookMapper>();
+
+            BookController bookSut = new BookController(bookService, bookMapper);
+
+            bookSut.GetAllBooks(title: "title");
+            bookService.Received().GetBookByTitle("title");
         }
 
         [Fact]
