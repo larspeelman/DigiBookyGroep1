@@ -8,8 +8,9 @@ namespace Digibooky_domain.Users
     {
         public enum Role
         {
+            Member,
+            Librarian,
             Administrator,
-            Libarian
         }
     }
 }

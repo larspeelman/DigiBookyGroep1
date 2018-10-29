@@ -7,6 +7,7 @@ using Digibooky_domain.Users;
 using Digibooky_services.Books;
 using Digibooky_services.Rentals;
 using Digibooky_services.Users;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -42,11 +43,14 @@ namespace Digibooky_api
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("ModeratorAccess",
-                    policy => policy.RequireRole(Roles.Role.Libarian.ToString()
+                    policy => policy.RequireRole(Roles.Role.Librarian.ToString()
                                                , Roles.Role.Administrator.ToString()));
 
             });
             services.AddSwagger();
+            services.AddCors();
+            services.AddAuthentication("BasicAuthentication")
+               .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +70,12 @@ namespace Digibooky_api
                 settings.GeneratorSettings.DefaultPropertyNameHandling =
                     PropertyNameHandling.CamelCase;
             });
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+            app.UseAuthentication();
             //app.UseHttpsRedirection();
             app.UseMvc();
         }

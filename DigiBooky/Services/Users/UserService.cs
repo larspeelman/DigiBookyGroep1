@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Digibooky_domain.Users;
 
 namespace Digibooky_services.Users
@@ -46,6 +48,7 @@ namespace Digibooky_services.Users
             if (IsEmailAdressValid(userToCreate.Email)
                 && IsIdentificationNumberValid(userToCreate.IdentificationNumber, userToCreate.Birthdate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)))
             {
+                userToCreate.RoleOfThisUser = Roles.Role.Member;
                 _userRepository.Save(userToCreate);
                 return userToCreate;
             }
@@ -58,9 +61,16 @@ namespace Digibooky_services.Users
             return _userRepository.GetAllUsers();
         }
 
-        public User SetUserAsLibarian(int id)
+        public User SetUserAsLibrarian(int id)
         {
             return _userRepository.SetUserAsLibrarian(id);
+        }
+
+        public async Task<User> Authenticate(string identificationNumber)
+        {
+            var user = await Task.Run(() => _userRepository.GetAllUsers().SingleOrDefault(x => x.IdentificationNumber == identificationNumber));
+
+            return user;
         }
     }
 }

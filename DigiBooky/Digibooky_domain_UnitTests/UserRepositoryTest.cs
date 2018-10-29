@@ -79,7 +79,7 @@ namespace Digibooky_domain_UnitTests
             userRepository.Save(testUser3);
             DBAuthors.AuthorDB = FakedataAuthor();
             //then
-            Assert.True(userRepository.SetUserAsLibrarian(testUser3.Id).RoleOfThisUser == Roles.Role.Libarian);
+            Assert.True(userRepository.SetUserAsLibrarian(testUser3.Id).RoleOfThisUser == Roles.Role.Librarian);
         }
 
         private User GetTestUser(DateTime day, string id)

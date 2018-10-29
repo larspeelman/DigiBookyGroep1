@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Digibooky_api.DTO;
 using Digibooky_api.Helper;
+using Digibooky_domain.Users;
 using Digibooky_services.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Digibooky_api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -42,6 +43,7 @@ namespace Digibooky_api.Controllers
         }
 
         // POST: api/User
+        [AllowAnonymous]
         [HttpPost]
         //[Authorize(Roles = "Administrator")]
         public ActionResult<UserDTOWithoutIdentificationNumber> RegisterNewUser([FromBody] UserDTOWithIdentificationNumber userDTOToCreate)
@@ -57,9 +59,9 @@ namespace Digibooky_api.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "Administrator")]
-        public ActionResult<UserDTOWithoutIdentificationNumber> RegiserLibarian(int id)
+        public ActionResult<UserDTOWithoutIdentificationNumber> RegisterLibrarian(int id)
         {
-            var user = _userService.SetUserAsLibarian(id);
+            var user = _userService.SetUserAsLibrarian(id);
             if (user == null)
             {
                 return BadRequest("BAD INPUT");
@@ -67,6 +69,19 @@ namespace Digibooky_api.Controllers
             return Ok(_mapperUser.FromUserToUserDTOWithoutId(user));
             
         }
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody]User userParam)
+        {
+            var user = await _userService.Authenticate(userParam.IdentificationNumber);
+
+            if (user == null)
+                return BadRequest(new { message = "identificationNumber is incorrect" });
+
+            return Ok(user);
+        }
+
 
         //// PUT: api/User/5
         //[HttpPut("{id}")]

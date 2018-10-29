@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Digibooky_domain.Authors;
 using Digibooky_domain.Books;
+using Digibooky_domain.Users;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -12,13 +13,25 @@ namespace Digibooky_api
         public static void Main(string[] args)
         {
             InitBooks();
+            InitUsers();
             CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+                
 
+
+        private static void InitUsers()
+        {
+            DBUsers.UsersInLibrary.Add(new User()
+            {
+                IdentificationNumber = "LP_21041987",
+                Email = "xxxx@hotmail.com",
+                RoleOfThisUser = Roles.Role.Administrator
+            });
+        }
         private static void InitBooks()
         {
             Random red = new Random();

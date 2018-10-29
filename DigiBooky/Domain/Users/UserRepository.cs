@@ -25,7 +25,7 @@ namespace Digibooky_domain.Users
             var userInDb = DBUsers.UsersInLibrary.SingleOrDefault(user => user.Id.ToString() == id.ToString());
             if (userInDb != null)
             {
-                userInDb.RoleOfThisUser = Roles.Role.Libarian;
+                userInDb.RoleOfThisUser = Roles.Role.Librarian;
             }
 
             return userInDb;

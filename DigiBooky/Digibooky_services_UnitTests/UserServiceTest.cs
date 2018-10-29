@@ -103,12 +103,12 @@ namespace Digibooky_services_UnitTests
             //Given
             IUserRepository repositoryUserStub = Substitute.For<IUserRepository>();
             User testUser = GetTestUser();
-            testUser.RoleOfThisUser = Roles.Role.Libarian;
+            testUser.RoleOfThisUser = Roles.Role.Librarian;
             UserService userService = new UserService(repositoryUserStub);
             repositoryUserStub.SetUserAsLibrarian(1).Returns(testUser);
 
             //then
-            Assert.True(userService.SetUserAsLibarian(1).RoleOfThisUser==Roles.Role.Libarian);
+            Assert.True(userService.SetUserAsLibrarian(1).RoleOfThisUser==Roles.Role.Librarian);
         }
 
         [Fact]
@@ -117,12 +117,12 @@ namespace Digibooky_services_UnitTests
             //Given
             IUserRepository repositoryUserStub = Substitute.For<IUserRepository>();
             User testUser = GetTestUser();
-            testUser.RoleOfThisUser = Roles.Role.Libarian;
+            testUser.RoleOfThisUser = Roles.Role.Librarian;
             UserService userService = new UserService(repositoryUserStub);
             repositoryUserStub.SetUserAsLibrarian(1).ReturnsNull();
 
             //then
-            Assert.Null(userService.SetUserAsLibarian(1));
+            Assert.Null(userService.SetUserAsLibrarian(1));
         }
 
         private User GetTestUser()
