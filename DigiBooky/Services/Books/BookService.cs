@@ -30,16 +30,6 @@ namespace Digibooky_services.Books
             return _IDBBookRepository.GetBookById(id);
         }
 
-        public IEnumerable<Book> GetBookByTitle(string title)
-        {
-            return _IDBBookRepository.GetAllBooks().Where(book => book.BookTitle.Contains(title));
-        }
-
-        public IEnumerable<Book> GetBookByAuthor(string author)
-        {
-            return _IDBBookRepository.GetAllBooks().Where(book => string.Concat(book.Author.FirstName, book.Author.LastName).Contains(author));
-        }
-
         public IEnumerable<Book> GetBookByFilter(List<Func<Book, bool>> delegateFuncs)
         {
             IEnumerable<Book> result = _IDBBookRepository.GetAllBooks();
@@ -53,22 +43,16 @@ namespace Digibooky_services.Books
             return result;
         }
 
-        //public IEnumerable<Book> GetBookBy(string isbn, string title, string author)
-        //{
-        //    IEnumerable<Book> result = _IDBBookRepository.GetAllBooks();
-        //    if (!string.IsNullOrEmpty(isbn))
-        //    {
-        //        result = result.Where(bk => bk.Isbn.Contains(isbn));
-        //    }
-        //    if (result.Any() && !string.IsNullOrEmpty(title))
-        //    {
-        //        result = result.Where(bk => bk.BookTitle.Contains(title));
-        //    }
-        //    if (result.Any() && !string.IsNullOrEmpty(author))
-        //    {
-        //        result = result.Where(bk => string.Concat(bk.Author.FirstName, bk.Author.LastName).Contains(author));
-        //    }
-        //    return result;
-        //}
+        public List<Func<Book, bool>> CreateDelegates(string isbn=null, string title=null, string author=null)
+        {
+                List<Func<Book, bool>> delegateFuncs = new List<Func<Book, bool>>();
+                if (!string.IsNullOrEmpty(isbn))
+                    delegateFuncs.Add(delegate (Book bk) { return bk.Isbn.Contains(isbn); });
+                if (!string.IsNullOrEmpty(title))
+                    delegateFuncs.Add(delegate (Book bk) { return bk.BookTitle.ToLower().Contains(title.ToLower()); });
+                if (!string.IsNullOrEmpty(author))
+                    delegateFuncs.Add(delegate (Book bk) { return string.Concat(bk.Author.FirstName, bk.Author.LastName).ToLower().Contains(author.ToLower()); });
+                return delegateFuncs;
+        }
     }
 }
