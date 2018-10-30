@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Digibooky_domain.Users;
 
 namespace Digibooky_services.Rentals
 {
@@ -11,12 +12,13 @@ namespace Digibooky_services.Rentals
     {
         private readonly IBookRepository _bookRepository;
         private readonly IRentalRepository _rentalRepository;
+        private readonly IUserRepository _userRepository;
 
-        public RentalService(IBookRepository bookRepository, IRentalRepository rentalRepository)
+        public RentalService(IBookRepository bookRepository, IRentalRepository rentalRepository, IUserRepository userRepository)
         {
             _bookRepository = bookRepository;
             _rentalRepository = rentalRepository;
-
+            _userRepository = userRepository;
         }
 
         public List<Rental> GetAllRentals()
@@ -37,9 +39,11 @@ namespace Digibooky_services.Rentals
         public Rental RentABook(Rental rental)
         {
             var book = _bookRepository.GetBookByIsbn(rental.Isbn).SingleOrDefault(bookToFind => bookToFind.Isbn == rental.Isbn);
-            if (book != null && book.BookIsRentable == true)
+            var user = _userRepository.GetAllUsers().SingleOrDefault(us => us.IdentificationNumber == rental.UserIdNumber);
+            if (book != null && book.BookIsRentable == true && user != null)
             {
                 book.BookIsRentable = false;
+                //rental.EndDate = DateTime.Today.AddDays();
                 _rentalRepository.AddRentalToDB(rental);
                 return rental;
 

@@ -26,7 +26,7 @@ namespace Digibooky_api.Helper
             return new Rental
             {
                 Isbn = rentalDTO.Isbn,
-                EndDate = rentalDTO.EndDate
+                UserIdNumber = rentalDTO.UserIdNumber
             };
         }
 

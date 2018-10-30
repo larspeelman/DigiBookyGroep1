@@ -58,7 +58,7 @@ namespace Digibooky_api.Controllers
 
         // PUT: api/Rental/5
         [HttpPut]
-        [Route("/{id}")]
+        [Route("{id}")]
         public ActionResult<RentalDTO> ReturnABook(int id)
         {
 
