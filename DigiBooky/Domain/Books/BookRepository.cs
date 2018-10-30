@@ -8,6 +8,10 @@ namespace Digibooky_domain.Books
 {
     public class BookRepository :IBookRepository
     {
+        public void AddBookToDB(Book newBook)
+        {
+            DBBooks.ListofBooks.Add(newBook);
+        }
 
         public IEnumerable<Book> GetAllBooks()
         {

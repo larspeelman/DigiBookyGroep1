@@ -84,7 +84,17 @@ namespace Digibooky_services_UnitTests
             Assert.Single(bookService.CreateDelegates(author: "schuur"));
             Assert.Equal(2, bookService.CreateDelegates(author: "schuur", title: "title").Count());
             Assert.Equal(3, bookService.CreateDelegates(author: "schuur", title: "title", isbn: "isbn").Count());
-        }
+        [Fact]
+        public void GivenBookService_WhenRegisterNewBook_ThenAddBookToDbReceivedRequest()
+        {
+            IBookRepository dbBookstub = Substitute.For<IBookRepository>();
+            BookService bookService = new BookService(dbBookstub);
+            
+            Book testBook = new Book { BookTitle = "test", Isbn= "123456", AuthorId = "1"};
+            bookService.RegisterNewBook(testBook);
 
+
+            dbBookstub.Received().AddBookToDB(testBook);
+        }
     }
 }

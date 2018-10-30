@@ -6,17 +6,21 @@ using Digibooky_api.DTO;
 using Digibooky_api.Helper;
 using Digibooky_domain.Books;
 using Digibooky_services.Books;
+using Digibooky_services.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Digibooky_api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BookController : ControllerBase
     {
         private readonly IBookService _bookService;
         private readonly IBookMapper _bookMapper;
+        private readonly IUserService _userService;
 
 
         public BookController(IBookService bookService, IBookMapper bookMapper)
@@ -27,6 +31,7 @@ namespace Digibooky_api.Controllers
 
         // GET: api/Book/GetAllBooks
         //http://localhost:49908/api/book?isbn=7&author=schuur
+        [AllowAnonymous]
         [HttpGet]
         //[Route("GetAllBooks")]
         public ActionResult<IEnumerable<BookDTO>> GetAllBooks(string isbn = null, string title = null, string author = null)
@@ -38,9 +43,10 @@ namespace Digibooky_api.Controllers
             {
                 return BadRequest($"No books found for selection");
             }
-            return Ok(result.Select(foundBook => _bookMapper.BooksMapper(foundBook)));
+            return Ok(result.Select(foundBook => _bookMapper.BooksMapperBookToDTO(foundBook)));
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<BookDTO> ShowDetailsOfBook(int id)
         {
@@ -49,13 +55,20 @@ namespace Digibooky_api.Controllers
             {
                 return BadRequest($"Book with id: {id} not found");
             }
-            return Ok(_bookMapper.BooksMapper(book));
+            return Ok(_bookMapper.BooksMapperBookToDTO(book));
         }
 
         // POST: api/Book
+        [Authorize(Policy = "ModeratorAccess")]
         [HttpPost]
-        public void Post([FromBody] BookDTO newBook)
+        public ActionResult<BookDTO> RegisterNewBook([FromBody] BookDTO newBook)
         {
+            var book = _bookService.RegisterNewBook(_bookMapper.BooksMapperDTOToBook(newBook));
+            if (book == null)
+            {
+                return BadRequest("Bad Input");
+            }
+            return Ok(_bookMapper.BooksMapperBookToDTO(book));
         }
 
         // PUT: api/Book/5

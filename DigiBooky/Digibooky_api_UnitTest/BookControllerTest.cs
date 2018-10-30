@@ -86,5 +86,20 @@ namespace DigiBooky_api_UnitTests
 
             bookService.Received().ShowDetailsOfBook(1);
         }
+
+        [Fact]
+        public void GivenBookController_WhenRegisterNewBook_ThenShouldEnterMEthodOInService()
+        {
+            IBookService bookService = Substitute.For<IBookService>();
+            IBookMapper bookMapper = Substitute.For<IBookMapper>();
+            BookController bookController = new BookController(bookService, bookMapper);
+            BookDTO testBook = new BookDTO();
+            var book = bookMapper.BooksMapperDTOToBook(testBook);
+
+
+            bookController.RegisterNewBook(testBook);
+
+            bookService.Received().RegisterNewBook(book);
+        }
     }
 }

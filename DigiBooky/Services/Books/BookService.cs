@@ -54,5 +54,28 @@ namespace Digibooky_services.Books
                     delegateFuncs.Add(delegate (Book bk) { return string.Concat(bk.Author.FirstName, bk.Author.LastName).ToLower().Contains(author.ToLower()); });
                 return delegateFuncs;
         }
+        public Book RegisterNewBook(Book newBook)
+        {
+            _IDBBookRepository.AddBookToDB(newBook);
+            return newBook;
+        }
+
+        //public IEnumerable<Book> GetBookBy(string isbn, string title, string author)
+        //{
+        //    IEnumerable<Book> result = _IDBBookRepository.GetAllBooks();
+        //    if (!string.IsNullOrEmpty(isbn))
+        //    {
+        //        result = result.Where(bk => bk.Isbn.Contains(isbn));
+        //    }
+        //    if (result.Any() && !string.IsNullOrEmpty(title))
+        //    {
+        //        result = result.Where(bk => bk.BookTitle.Contains(title));
+        //    }
+        //    if (result.Any() && !string.IsNullOrEmpty(author))
+        //    {
+        //        result = result.Where(bk => string.Concat(bk.Author.FirstName, bk.Author.LastName).Contains(author));
+        //    }
+        //    return result;
+        //}
     }
 }

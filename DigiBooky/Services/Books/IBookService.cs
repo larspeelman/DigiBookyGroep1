@@ -12,5 +12,6 @@ namespace Digibooky_services.Books
         Book ShowDetailsOfBook(int id);
         IEnumerable<Book> GetBookByFilter(List<Func<Book, bool>> delegateFuncs);
         List<Func<Book, bool>> CreateDelegates(string isbn=null, string title=null, string author=null);
+        Book RegisterNewBook(Book newBook);
     }
 }

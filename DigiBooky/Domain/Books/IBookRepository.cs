@@ -9,5 +9,6 @@ namespace Digibooky_domain.Books
         IEnumerable<Book> GetAllBooks();
         Book GetBookById(int id);
         IEnumerable<Book> GetBookByIsbn(string isbn);
+        void AddBookToDB(Book newBook);
     }
 }
