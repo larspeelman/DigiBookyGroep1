@@ -9,7 +9,8 @@ namespace Digibooky_api.DTO
     {
         public string BookTitle { get; set; }
         public string Isbn { get; set; }
-        public string AuthorName { get; set; }
+        public string AuthorFirstName { get; set; }
+        public string AuthorLastName { get; set; }
         public int BookId { get; set; }
         public bool BookIsRentable { get; set; }
 
@@ -19,12 +20,13 @@ namespace Digibooky_api.DTO
             return dTO != null &&
                    BookTitle == dTO.BookTitle &&
                    Isbn == dTO.Isbn &&
-                   AuthorName == dTO.AuthorName;
+                   AuthorFirstName == dTO.AuthorFirstName &&
+                   AuthorLastName == dTO.AuthorLastName;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(BookTitle, Isbn, AuthorName);
+            return HashCode.Combine(BookTitle, Isbn, AuthorFirstName, AuthorLastName);
         }
     }
 

@@ -1,9 +1,11 @@
 ﻿
 using Digibooky_api.DTO;
 using Digibooky_api.Helper;
+using Digibooky_domain.Authors;
 using Digibooky_domain.Books;
 using Digibooky_domain.Rentals;
 using Digibooky_domain.Users;
+using Digibooky_services.Authors;
 using Digibooky_services.Books;
 using Digibooky_services.Rentals;
 using Digibooky_services.Users;
@@ -39,7 +41,10 @@ namespace Digibooky_api
                     .AddSingleton<IBookMapper, BookMapper>()
                     .AddSingleton<IMapperUser, MapperUser>()
                     .AddSingleton<IRentalRepository, RentalRepository>()
-                    .AddSingleton<IRentalMapper, RentalMapper>();
+                    .AddSingleton<IRentalMapper, RentalMapper>()
+                    .AddSingleton<IAuthorService, AuthorService>()
+                    .AddSingleton<IAuthorRepository, AuthorRepository>();
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("ModeratorAccess",

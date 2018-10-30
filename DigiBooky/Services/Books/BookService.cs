@@ -53,6 +53,12 @@ namespace Digibooky_services.Books
             return result;
         }
 
+        public Book RegisterNewBook(Book newBook)
+        {
+            _IDBBookRepository.AddBookToDB(newBook);
+            return newBook;
+        }
+
         //public IEnumerable<Book> GetBookBy(string isbn, string title, string author)
         //{
         //    IEnumerable<Book> result = _IDBBookRepository.GetAllBooks();

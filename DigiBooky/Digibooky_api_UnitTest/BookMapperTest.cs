@@ -17,7 +17,7 @@ namespace DigiBooky_api_UnitTests
             DBAuthors.AuthorDB = FakedataAuthor();
             BookMapper bookMapper= new BookMapper();
             Book book = new Book{ BookTitle = "test", Isbn = "5", AuthorId ="1" };
-            Assert.IsType<BookDTO>(bookMapper.BooksMapper(book));
+            Assert.IsType<BookDTO>(bookMapper.BooksMapperBookToDTO(book));
         }
 
         public List<Author> FakedataAuthor()

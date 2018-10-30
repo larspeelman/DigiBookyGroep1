@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Digibooky_domain.Books;
 using Digibooky_services.Books;
@@ -40,8 +41,20 @@ namespace Digibooky_services_UnitTests
 
 
             dbBookstub.Received().GetBookById(1);
-
-            
         }
+
+        [Fact]
+        public void GivenBookService_WhenRegisterNewBook_ThenAddBookToDbReceivedRequest()
+        {
+            IBookRepository dbBookstub = Substitute.For<IBookRepository>();
+            BookService bookService = new BookService(dbBookstub);
+            
+            Book testBook = new Book { BookTitle = "test", Isbn= "123456", AuthorId = "1"};
+            bookService.RegisterNewBook(testBook);
+
+
+            dbBookstub.Received().AddBookToDB(testBook);
+        }
+        
     }
 }

@@ -10,6 +10,7 @@ namespace Digibooky_api.Helper
 {
    public interface IBookMapper
     {
-        BookDTO BooksMapper(Book book);
+        BookDTO BooksMapperBookToDTO(Book book);
+        Book BooksMapperDTOToBook(BookDTO bookDTO);
     }
 }

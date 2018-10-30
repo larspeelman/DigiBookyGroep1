@@ -14,5 +14,6 @@ namespace Digibooky_services.Books
         IEnumerable<Book> GetBookByAuthor(string author);
         //IEnumerable<Book> GetBookBy(string isbn, string title, string author);
         IEnumerable<Book> GetBookByFilter(List<Func<Book, bool>> delegateFuncs);
+        Book RegisterNewBook(Book newBook);
     }
 }
