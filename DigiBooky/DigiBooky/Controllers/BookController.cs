@@ -61,7 +61,6 @@ namespace Digibooky_api.Controllers
             return Ok(_bookService.GetAllBooks().Select(_bookMapper.BooksMapper));
         }
 
-
         [HttpGet("{id}")]
         public ActionResult<BookDTO> ShowDetailsOfBook(int id)
         {
