@@ -12,6 +12,12 @@ namespace Digibooky_services_UnitTests
 {
     public class BookServiceTest
     {
+        public BookServiceTest()
+        {
+            DBAuthors.AuthorDB.Clear();
+            DBBooks.ListofBooks.Clear();
+        }
+
         [Fact]
         public void GivenBookService_WhenGetAllBooks_ThenDBBooksReceiceCall()
         {
@@ -46,15 +52,13 @@ namespace Digibooky_services_UnitTests
         [Fact]
         public void GivenBookService_WhenSearchForAuthor_ThenReturnListofbooksThatContainsAuthor()
         {
-            Author.IdCounter = 1;
             List<Author> authorList = new List<Author>
             {
-                new Author("Jef", "Depaepe"),
-                new Author("Jos", "Schuurlink"),
-                new Author("Guido", "Gazelle"),
+                new Author("Jef", "Depaepe"){Id = "1"},
+                new Author("Jos", "Schuurlink"){Id = "2"},
+                new Author("Guido", "Gazelle"){Id = "3"},
             };
             DBAuthors.AuthorDB = authorList;
-            DBBooks.ListofBooks.Clear();
             DBBooks.ListofBooks.Add(new Book { BookTitle = $"BookTitle1", AuthorId = "1", Isbn = "isbn1" });
             DBBooks.ListofBooks.Add(new Book { BookTitle = $"BookTitle2", AuthorId = "2", Isbn = "isbn2" });
             DBBooks.ListofBooks.Add(new Book { BookTitle = $"BookTitle3", AuthorId = "2", Isbn = "isbn2" });

@@ -15,11 +15,13 @@ namespace Digibooky_services_UnitTests
         private RentalService _rentalService;
         private IRentalRepository _rentalRepositoryStub;
         private IBookRepository _bookRepositoryStub;
+        private IUserRepository _userRepositoryStub;
         private void Initialize_RentalServiceTest()
         {
             _rentalRepositoryStub = Substitute.For<IRentalRepository>();
             _bookRepositoryStub = Substitute.For<IBookRepository>();
-            _rentalService = new RentalService(_bookRepositoryStub,_rentalRepositoryStub);
+            _userRepositoryStub = Substitute.For<IUserRepository>();
+            _rentalService = new RentalService(_bookRepositoryStub,_rentalRepositoryStub,_userRepositoryStub);
             DBAuthors.AuthorDB.Clear();
             DBAuthors.AuthorDB.Add(new Author("testFirstName", "testLastName"));
             DBBooks.ListofBooks.Clear();
@@ -44,6 +46,7 @@ namespace Digibooky_services_UnitTests
             Initialize_RentalServiceTest();
             //Given
             Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTest" };
+            DBUsers.UsersInLibrary.Add(new User() { FirstName = "testUser", Birthdate = new DateTime(1987, 5, 21), IdentificationNumber = "LP_21051987", Email = "xx@hotmail.com" });
 
             //when
             _rentalService.RentABook(testRental);
