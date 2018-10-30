@@ -24,7 +24,7 @@ namespace Digibooky_services_UnitTests
             DBAuthors.AuthorDB.Add(new Author("testFirstName", "testLastName"));
             DBBooks.ListofBooks.Clear();
             DBRentals.DBRental.Clear();
-            RentalDTO.rentalCounter = 0;
+            Rental.rentalCounter = 0;
             DBBooks.ListofBooks.Add(new Book()
             {
                 AuthorId = "0",
@@ -86,13 +86,13 @@ namespace Digibooky_services_UnitTests
         {
             Initialize_RentalServiceTest();
             //Given
-            Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTest", RentalId = "0" };
+            Rental testRental = new Rental() { UserIdNumber = "LP_21051987", Isbn = "isbnTest"};
             _rentalService.RentABook(testRental);
-            _rentalRepositoryStub.GetAllRentals().Returns(new System.Collections.Generic.List<Rental> { testRental });
+            _rentalRepositoryStub.GetRentalBasedOnId(0).Returns(testRental);
             _rentalRepositoryStub.ReturnRentalBook(testRental).Returns(testRental);
 
             //when
-             Rental expected = _rentalService.ReturnRentalBook(testRental, 0);
+             Rental expected = _rentalService.ReturnRentalBook(0);
 
             //then
             Assert.Equal("LP_21051987", expected.UserIdNumber);

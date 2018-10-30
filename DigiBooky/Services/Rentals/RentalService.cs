@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Digibooky_domain.Users;
 
 namespace Digibooky_services.Rentals
 {
@@ -11,12 +12,13 @@ namespace Digibooky_services.Rentals
     {
         private readonly IBookRepository _bookRepository;
         private readonly IRentalRepository _rentalRepository;
+        private readonly IUserRepository _userRepository;
 
-        public RentalService(IBookRepository bookRepository, IRentalRepository rentalRepository)
+        public RentalService(IBookRepository bookRepository, IRentalRepository rentalRepository, IUserRepository userRepository)
         {
             _bookRepository = bookRepository;
             _rentalRepository = rentalRepository;
-
+            _userRepository = userRepository;
         }
 
         public List<Rental> GetAllRentals()
@@ -24,13 +26,24 @@ namespace Digibooky_services.Rentals
             return _rentalRepository.GetAllRentals();
         }
 
+        public Rental GetRentalBasedOnId(int id)
+        {
+            return _rentalRepository.GetRentalBasedOnId(id);
+        }
+
+        public bool IsRentalReturnedOnTime(DateTime endDate)
+        {
+            return endDate > DateTime.Today;
+        }
+
         public Rental RentABook(Rental rental)
         {
             var book = _bookRepository.GetBookByIsbn(rental.Isbn).SingleOrDefault(bookToFind => bookToFind.Isbn == rental.Isbn);
-            if (book != null && book.BookIsRentable == true)
+            var user = _userRepository.GetAllUsers().SingleOrDefault(us => us.IdentificationNumber == rental.UserIdNumber);
+            if (book != null && book.BookIsRentable == true && user != null)
             {
-                rental.EndDate = SetDueDate();
                 book.BookIsRentable = false;
+                //rental.EndDate = DateTime.Today.AddDays();
                 _rentalRepository.AddRentalToDB(rental);
                 return rental;
 
@@ -38,23 +51,14 @@ namespace Digibooky_services.Rentals
             return null;
         }
 
-        public Rental ReturnRentalBook(Rental rental, int id)
+        public Rental ReturnRentalBook(int id)
         {
-            var rentalToReturn = _rentalRepository.GetAllRentals().SingleOrDefault(rentalBook => rentalBook.Isbn == rental.Isbn);
-            if (rentalToReturn != null && id.ToString() == rental.RentalId)
+            var rentalToReturn = _rentalRepository.GetRentalBasedOnId(id);
+            if (rentalToReturn != null)
             {
                 return _rentalRepository.ReturnRentalBook(rentalToReturn);
             }
             return null;
         }
-
-        private DateTime SetDueDate()
-        {
-            var dayToday = DateTime.Today;
-            return dayToday.AddDays(21);
-
-        }
-
-
     }
 }

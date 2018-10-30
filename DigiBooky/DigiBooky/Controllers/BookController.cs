@@ -36,14 +36,8 @@ namespace Digibooky_api.Controllers
         //[Route("GetAllBooks")]
         public ActionResult<IEnumerable<BookDTO>> GetAllBooks(string isbn = null, string title = null, string author = null)
         {
-            List<Func<Book, bool>> delegateFuncs = new List<Func<Book, bool>>();
-            if (!string.IsNullOrEmpty(isbn))
-                delegateFuncs.Add(delegate (Book bk) { return bk.Isbn.Contains(isbn); });
-            if (!string.IsNullOrEmpty(title))
-                delegateFuncs.Add(delegate (Book bk) { return bk.BookTitle.ToLower().Contains(title.ToLower()); });
-            if (!string.IsNullOrEmpty(author))
-                delegateFuncs.Add(delegate (Book bk) { return string.Concat(bk.Author.FirstName, bk.Author.LastName).ToLower().Contains(author.ToLower()); });
-
+            List<Func<Book, bool>> delegateFuncs = _bookService.CreateDelegates(isbn, title, author);
+ 
             IEnumerable<Book> result = _bookService.GetBookByFilter(delegateFuncs);
             if (!result.Any())
             {

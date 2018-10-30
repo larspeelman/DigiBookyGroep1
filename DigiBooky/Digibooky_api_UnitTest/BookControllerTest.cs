@@ -4,6 +4,7 @@ using System.Text;
 using Digibooky_api.Controllers;
 using Digibooky_api.DTO;
 using Digibooky_api.Helper;
+using Digibooky_domain.Books;
 using Digibooky_services.Books;
 using NSubstitute;
 using Xunit;
@@ -19,21 +20,27 @@ namespace DigiBooky_api_UnitTests
             IBookMapper bookMapper = Substitute.For<IBookMapper>();
 
             BookController bookSut = new BookController(bookService, bookMapper);
+            List<Func<Book, bool>> delegateFuncs = new List<Func<Book, bool>>();
 
+            bookService.CreateDelegates().Returns(delegateFuncs);
             bookSut.GetAllBooks();
-            bookService.Received().GetAllBooks();
+            bookService.Received().GetBookByFilter(delegateFuncs);
         }
 
         [Fact]
         public void GivenBookController_WhenAskListofBooksWithIsbN_ThenShouldEnterMethodInService()
         {
+            List<Func<Book, bool>> delegateFuncs = new List<Func<Book, bool>>();
+            delegateFuncs.Add(delegate (Book bk) { return bk.Isbn.Contains("5"); });
+
             IBookService bookService = Substitute.For<IBookService>();
             IBookMapper bookMapper = Substitute.For<IBookMapper>();
 
             BookController bookSut = new BookController(bookService, bookMapper);
 
+            bookService.CreateDelegates(isbn: "5").Returns(delegateFuncs);
             bookSut.GetAllBooks(isbn:"5");
-            bookService.Received().GetBookByIsbn("5");
+            bookService.Received().GetBookByFilter(delegateFuncs);
         }
 
         [Fact]
@@ -43,9 +50,12 @@ namespace DigiBooky_api_UnitTests
             IBookMapper bookMapper = Substitute.For<IBookMapper>();
 
             BookController bookSut = new BookController(bookService, bookMapper);
+            List<Func<Book, bool>> delegateFuncs = new List<Func<Book, bool>>();
+            delegateFuncs.Add(delegate (Book bk) { return string.Concat(bk.Author.FirstName, bk.Author.LastName).ToLower().Contains("author"); });
 
-            bookSut.GetAllBooks(author: "author");
-            bookService.Received().GetBookByAuthor("author");
+            bookService.CreateDelegates(author: "Author").Returns(delegateFuncs);
+            bookSut.GetAllBooks(author: "Author");
+            bookService.Received().GetBookByFilter(delegateFuncs);
         }
 
         [Fact]
@@ -55,9 +65,12 @@ namespace DigiBooky_api_UnitTests
             IBookMapper bookMapper = Substitute.For<IBookMapper>();
 
             BookController bookSut = new BookController(bookService, bookMapper);
+            List<Func<Book, bool>> delegateFuncs = new List<Func<Book, bool>>();
+            delegateFuncs.Add(delegate (Book bk) { return bk.BookTitle.ToLower().Contains("title"); });
 
-            bookSut.GetAllBooks(title: "title");
-            bookService.Received().GetBookByTitle("title");
+            bookService.CreateDelegates(title: "Title").Returns(delegateFuncs);
+            bookSut.GetAllBooks(title: "Title");
+            bookService.Received().GetBookByFilter(delegateFuncs);
         }
 
         [Fact]

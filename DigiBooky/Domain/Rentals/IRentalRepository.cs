@@ -10,5 +10,6 @@ namespace Digibooky_domain.Rentals
         void AddRentalToDB(Rental bookToRent);
         List<Rental> GetAllRentals();
         Rental ReturnRentalBook(Rental rentalToReturn);
+        Rental GetRentalBasedOnId(int id);
     }
 }

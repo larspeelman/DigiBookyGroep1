@@ -104,7 +104,43 @@ namespace Digibooky_IntigrationTest.Books
             var listofbooks = JsonConvert.DeserializeObject<List<BookDTO>>(responseString);
 
             Assert.Single(listofbooks);
+        }
 
+        [Fact]
+        public async Task GetAllBooks_WhenSetFilter_ReturnMatchingBooks()
+        {
+            DBAuthors.AuthorDB = FakedataAuthor();
+            List<Book> testListOfBooks = new List<Book>
+            {
+                new Book
+                {
+                    BookTitle = "test",
+                    AuthorId = DBAuthors.AuthorDB[0].Id.ToString(),
+                    Isbn = "53151531"
+                },
+                new Book
+                {
+                    BookTitle = "test2",
+                    AuthorId = DBAuthors.AuthorDB[1].Id.ToString(),
+                    Isbn = "53161631"
+                }
+            };
+            DBBooks.ListofBooks = testListOfBooks;
+            var response = await _client.GetAsync("/api/book?isbn=15");
+            var responseString = await response.Content.ReadAsStringAsync();
+            var listofbooks = JsonConvert.DeserializeObject<List<BookDTO>>(responseString);
+            Assert.Single(listofbooks);
+
+            response = await _client.GetAsync("/api/book?isbn=1");
+            responseString = await response.Content.ReadAsStringAsync();
+            listofbooks = JsonConvert.DeserializeObject<List<BookDTO>>(responseString);
+            Assert.Equal(2,listofbooks.Count);
+
+
+            response = await _client.GetAsync("/api/book?isbn=1&author=schuur");
+            responseString = await response.Content.ReadAsStringAsync();
+            listofbooks = JsonConvert.DeserializeObject<List<BookDTO>>(responseString);
+            Assert.Single(listofbooks);
         }
 
         public  List<Author> FakedataAuthor()

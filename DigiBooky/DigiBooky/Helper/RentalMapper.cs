@@ -16,7 +16,8 @@ namespace Digibooky_api.Helper
             return new RentalDTO
             {
                 Isbn = rental.Isbn,
-                EndDate = rental.EndDate
+                EndDate = rental.EndDate,
+                UniqueRentalId = rental.RentalId
             };
         }
 
@@ -25,10 +26,10 @@ namespace Digibooky_api.Helper
             return new Rental
             {
                 Isbn = rentalDTO.Isbn,
-                RentalId = rentalDTO.UniqueRentalId,
-                UserIdNumber = rentalDTO.UserIdNumber,
-                EndDate = rentalDTO.EndDate
+                UserIdNumber = rentalDTO.UserIdNumber
             };
         }
+
+        
     }
 }

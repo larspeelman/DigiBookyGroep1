@@ -19,9 +19,14 @@ namespace Digibooky_domain.Rentals
         public string Isbn { get; set; }
         public Book Book => ReturnBookForRental(); 
         public User User =>ReturnUserForThisRental();
+        public static int rentalCounter;
+
 
         public Rental()
         {
+            RentalId = rentalCounter.ToString();
+            rentalCounter++;
+            EndDate = SetDueDate();
         }
 
         private User ReturnUserForThisRental()
@@ -49,6 +54,13 @@ namespace Digibooky_domain.Rentals
         public override int GetHashCode()
         {
             return HashCode.Combine(Book, UserIdNumber, EndDate, User, RentalId, Isbn);
+        }
+
+        private DateTime SetDueDate()
+        {
+            var dayToday = DateTime.Today;
+            return dayToday.AddDays(21);
+
         }
     }
 
