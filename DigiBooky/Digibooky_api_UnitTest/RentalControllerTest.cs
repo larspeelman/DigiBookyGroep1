@@ -66,13 +66,13 @@ namespace Digibooky_api_UnitTests
             RentalDTO testRentalDTO = new RentalDTO() { UserIdNumber = "LP_21051987", Isbn = "isbnTest" };
             Rental testRental = new Rental();
             rentalMapperStub.FromRentalDTOToRental(testRentalDTO).Returns(testRental);
-            rentalServiceStub.ReturnRentalBook(testRental, 0).Returns(testRental);
+            rentalServiceStub.ReturnRentalBook(0).Returns(testRental);
 
             //When
-            rentalController.ReturnABook(testRentalDTO, 0);
+            rentalController.ReturnABook(0);
 
             //
-            rentalServiceStub.Received().ReturnRentalBook(testRental, 0);
+            rentalServiceStub.Received().ReturnRentalBook(0);
         }
     }
 }

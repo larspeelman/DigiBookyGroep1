@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Digibooky_api.DTO;
 using Digibooky_api.Helper;
+using Digibooky_api.Properties;
 using Digibooky_services.Rentals;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@ namespace Digibooky_api.Controllers
         public IEnumerable<RentalDTO> Get()
         {
             List<RentalDTO> listOfAllRentalsDTOs = new List<RentalDTO>();
-           listOfAllRentalsDTOs = _rentalService.GetAllRentals().Select(rental => { return _rentalMapper.FromRentalToRentalDTO(rental); }).ToList();
+            listOfAllRentalsDTOs = _rentalService.GetAllRentals().Select(rental => { return _rentalMapper.FromRentalToRentalDTO(rental); }).ToList();
             return listOfAllRentalsDTOs;
         }
 
@@ -44,25 +45,35 @@ namespace Digibooky_api.Controllers
         [HttpPost]
         public ActionResult<RentalDTO> RentABook([FromBody] RentalDTO bookToLend)
         {
+
             var rental = _rentalService.RentABook(_rentalMapper.FromRentalDTOToRental(bookToLend));
             if (rental == null)
             {
                 return BadRequest("bad input");
             }
             return Ok(_rentalMapper.FromRentalToRentalDTO(rental));
+
+
         }
 
         // PUT: api/Rental/5
         [HttpPut]
         [Route("/{id}")]
-        public ActionResult<RentalDTO> ReturnABook([FromBody] RentalDTO rentalDTOToReturn, int id)
+        public ActionResult<RentalDTO> ReturnABook(int id)
         {
-            var rental = _rentalService.ReturnRentalBook(_rentalMapper.FromRentalDTOToRental(rentalDTOToReturn),id);
+
+            var rental = _rentalService.ReturnRentalBook(id);
             if (rental == null)
             {
                 return BadRequest("Not possible to return this book");
             }
-            return Ok(rental);
+            if (_rentalService.IsRentalReturnedOnTime(rental.EndDate))
+            {
+
+                return Ok(_rentalMapper.FromRentalToRentalDTO(rental));
+            }
+            return Ok(Resources.Rental_ToLate);
+
         }
 
         // DELETE: api/ApiWithActions/5

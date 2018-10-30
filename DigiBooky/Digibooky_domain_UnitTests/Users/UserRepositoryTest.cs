@@ -9,6 +9,10 @@ namespace Digibooky_domain_UnitTests.Users
 {
     public class UserRepositoryTest
     {
+        public UserRepositoryTest()
+        {
+            DBUsers.UsersInLibrary.Clear();
+        }
         [Fact]
         public void GivenDBUsers_WhenRegisterNewUniqueUser_ThenUserInDB()
         {
@@ -89,6 +93,7 @@ namespace Digibooky_domain_UnitTests.Users
             testUser6.Email = "xxx@hotmail.com";
             testUser6.Id = 0;
             dbUsers4.Save(testUser6);
+            //dbUsers4.Save(testUser6);
             //then
             Assert.True(dbUsers4.SetUserAsLibrarian(testUser6.Id).RoleOfThisUser == Roles.Role.Librarian);
             //ClearAllDataBasesUserRepositoryTest();

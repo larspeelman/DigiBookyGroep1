@@ -10,6 +10,7 @@ using Digibooky_services.Rentals;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Net.Http;
 using Xunit;
 
 namespace Digibooky_IntigrationTest.Rentals
@@ -29,7 +30,7 @@ namespace Digibooky_IntigrationTest.Rentals
             DBAuthors.AuthorDB.Add(new Author("testFirstName", "testLastName"));
             DBBooks.ListofBooks.Clear();
             DBRentals.DBRental.Clear();
-            RentalDTO.rentalCounter = 0;
+            Rental.rentalCounter = 0;
             DBBooks.ListofBooks.Add(new Book()
             {
                 AuthorId = "0",
@@ -60,7 +61,7 @@ namespace Digibooky_IntigrationTest.Rentals
             rentalController.RentABook(testRental);
 
             //When
-            rentalController.ReturnABook(testRental, 0);
+            rentalController.ReturnABook(0);
 
             //Then
             Assert.Null(DBRentals.DBRental.SingleOrDefault(rental => rental.Isbn == "isbnTest"));
@@ -75,11 +76,27 @@ namespace Digibooky_IntigrationTest.Rentals
 
 
             //When
-            var check = rentalController.ReturnABook(testRental, 1).Result;
+            var check = rentalController.ReturnABook(1).Result;
 
 
             //then
             Assert.IsType<BadRequestObjectResult>(check);
+
+        }
+
+        [Fact]
+        public void ReturnABook_ReturnDateIsLaterThanEndDateRental_ThenReturnOkWithMessageToLate()
+        {
+            Initialize_RentalIntegrationTest();
+            RentalDTO testRental = new RentalDTO() { UserIdNumber = "LP_21051987", Isbn = "isbnTest", EndDate = new DateTime(2018, 01, 01) };
+            rentalController.RentABook(testRental);
+
+
+            //When
+            var check = (OkObjectResult)rentalController.ReturnABook(0).Result;
+
+            //then
+            Assert.Equal(Digibooky_api.Properties.Resources.Rental_ToLate, check.Value.ToString());
 
         }
     }

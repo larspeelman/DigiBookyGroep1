@@ -9,6 +9,8 @@ namespace Digibooky_services.Rentals
     {
         Rental RentABook(Rental rental);
         List<Rental> GetAllRentals();
-        Rental ReturnRentalBook(Rental rental, int id);
+        Rental ReturnRentalBook(int id);
+        Rental GetRentalBasedOnId(int id);
+        bool IsRentalReturnedOnTime(DateTime endDate);
     }
 }

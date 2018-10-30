@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Digibooky_domain.Rentals
@@ -18,12 +19,18 @@ namespace Digibooky_domain.Rentals
             return DBRentals.DBRental;
         }
 
+        public Rental GetRentalBasedOnId(int id)
+        {
+            return DBRentals.DBRental.SingleOrDefault(rental => rental.RentalId == id.ToString());
+        }
+
         public Rental ReturnRentalBook(Rental rentalToReturn)
         {
             if (rentalToReturn.Book.BookIsRentable == false)
             {
                 rentalToReturn.Book.BookIsRentable = true;
                 DBRentals.DBRental.Remove(rentalToReturn);
+                
                 return rentalToReturn;
             }
             return null;
