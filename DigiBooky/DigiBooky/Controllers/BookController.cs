@@ -20,7 +20,6 @@ namespace Digibooky_api.Controllers
     {
         private readonly IBookService _bookService;
         private readonly IBookMapper _bookMapper;
-        private readonly IUserService _userService;
 
 
         public BookController(IBookService bookService, IBookMapper bookMapper)

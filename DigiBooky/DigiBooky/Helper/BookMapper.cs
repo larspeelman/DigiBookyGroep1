@@ -13,6 +13,11 @@ namespace Digibooky_api.DTO
     {
         private readonly IAuthorService _authorService;
 
+        public BookMapper(IAuthorService authorService)
+        {
+            _authorService = authorService;
+        }
+
         public BookDTO BooksMapperBookToDTO(Book book)
         {
             BookDTO bookDto = new BookDTO

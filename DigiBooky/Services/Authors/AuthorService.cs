@@ -10,6 +10,11 @@ namespace Digibooky_services.Authors
     {
         private readonly IAuthorRepository _authorRepository;
 
+        public AuthorService(IAuthorRepository authorRepository)
+        {
+            _authorRepository = authorRepository;
+        }
+
         public string CheckIfAuthorAlreadyExists(string firstName, string lastName)
         {
             var authorToFind = _authorRepository.GetauthorByName(firstName, lastName);
