@@ -9,10 +9,8 @@ namespace Digibooky_services.Books
     {
         IEnumerable<Book> GetAllBooks();
         IEnumerable<Book> GetBookByIsbn(string isbn);
-        IEnumerable<Book> GetBookByTitle(string title);
         Book ShowDetailsOfBook(int id);
-        IEnumerable<Book> GetBookByAuthor(string author);
-        //IEnumerable<Book> GetBookBy(string isbn, string title, string author);
         IEnumerable<Book> GetBookByFilter(List<Func<Book, bool>> delegateFuncs);
+        List<Func<Book, bool>> CreateDelegates(string isbn=null, string title=null, string author=null);
     }
 }
