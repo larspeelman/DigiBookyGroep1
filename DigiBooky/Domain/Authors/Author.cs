@@ -9,7 +9,7 @@ namespace Digibooky_domain.Authors
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Id { get; set; }
-        private static int IdCounter = 0;
+        public static int IdCounter = 0;
 
 
         public Author(string firstName, string lastName)

@@ -9,5 +9,6 @@ namespace Digibooky_services.Rentals
     {
         Rental RentABook(Rental rental);
         List<Rental> GetAllRentals();
+        Rental ReturnRentalBook(Rental rental, int id);
     }
 }

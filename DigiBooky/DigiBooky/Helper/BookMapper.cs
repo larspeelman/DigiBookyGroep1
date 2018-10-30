@@ -16,7 +16,8 @@ namespace Digibooky_api.DTO
                 BookTitle = book.BookTitle,
                 Isbn = book.Isbn,
                 AuthorName = string.Concat(book.Author.FirstName.TrimEnd(), " ", book.Author.LastName.TrimEnd()),
-                BookId = book.Id
+                BookId = book.Id,
+                BookIsRentable = book.BookIsRentable
                 
             };
             return bookDto;

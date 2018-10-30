@@ -21,7 +21,7 @@ namespace Digibooky_services.Rentals
 
         public List<Rental> GetAllRentals()
         {
-            return DBRentals.DBRental;
+            return _rentalRepository.GetAllRentals();
         }
 
         public Rental RentABook(Rental rental)
@@ -38,6 +38,16 @@ namespace Digibooky_services.Rentals
             return null;
         }
 
+        public Rental ReturnRentalBook(Rental rental, int id)
+        {
+            var rentalToReturn = _rentalRepository.GetAllRentals().SingleOrDefault(rentalBook => rentalBook.Isbn == rental.Isbn);
+            if (rentalToReturn != null && id.ToString() == rental.RentalId)
+            {
+                return _rentalRepository.ReturnRentalBook(rentalToReturn);
+            }
+            return null;
+        }
+
         private DateTime SetDueDate()
         {
             var dayToday = DateTime.Today;
@@ -45,6 +55,6 @@ namespace Digibooky_services.Rentals
 
         }
 
-       
+
     }
 }

@@ -53,9 +53,16 @@ namespace Digibooky_api.Controllers
         }
 
         // PUT: api/Rental/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Route("/{id}")]
+        public ActionResult<RentalDTO> ReturnABook([FromBody] RentalDTO rentalDTOToReturn, int id)
         {
+            var rental = _rentalService.ReturnRentalBook(_rentalMapper.FromRentalDTOToRental(rentalDTOToReturn),id);
+            if (rental == null)
+            {
+                return BadRequest("Not possible to return this book");
+            }
+            return Ok(rental);
         }
 
         // DELETE: api/ApiWithActions/5

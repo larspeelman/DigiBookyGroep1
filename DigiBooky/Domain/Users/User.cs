@@ -9,7 +9,7 @@ namespace Digibooky_domain.Users
     public class User
     {
         public int Id { get; set; }
-        private static int UserCounter = 0;
+        public static int UserCounter = 0;
         public string IdentificationNumber { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
